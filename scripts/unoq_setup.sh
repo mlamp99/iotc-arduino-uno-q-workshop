@@ -85,8 +85,31 @@ if [[ "$SKIP_SDK" == "0" ]]; then
 fi
 
 if [[ "$NO_RENAME_CERTS" == "0" ]]; then
+  # If user copied files to /tmp via scp, pull them into the demo dir.
+  if [[ -f "/tmp/iotcDeviceConfig.json" && ! -f "$DEMO_DIR/iotcDeviceConfig.json" ]]; then
+    cp "/tmp/iotcDeviceConfig.json" "$DEMO_DIR/iotcDeviceConfig.json"
+    echo "Copied /tmp/iotcDeviceConfig.json -> $DEMO_DIR/iotcDeviceConfig.json"
+  fi
+
   if [[ ! -f "$DEMO_DIR/device-cert.pem" ]]; then
-    cert_src="$(ls -1 "$DEMO_DIR"/cert_*.crt "$DEMO_DIR"/cert_*.pem 2>/dev/null | head -n 1 || true)"
+    if [[ -f "/tmp/device-cert.pem" ]]; then
+      cp "/tmp/device-cert.pem" "$DEMO_DIR/device-cert.pem"
+      echo "Copied /tmp/device-cert.pem -> $DEMO_DIR/device-cert.pem"
+    fi
+  fi
+
+  if [[ ! -f "$DEMO_DIR/device-pkey.pem" ]]; then
+    if [[ -f "/tmp/device-pkey.pem" ]]; then
+      cp "/tmp/device-pkey.pem" "$DEMO_DIR/device-pkey.pem"
+      echo "Copied /tmp/device-pkey.pem -> $DEMO_DIR/device-pkey.pem"
+    fi
+  fi
+
+  if [[ ! -f "$DEMO_DIR/device-cert.pem" ]]; then
+    cert_src="$(ls -1 /tmp/cert_*.crt /tmp/cert_*.pem 2>/dev/null | head -n 1 || true)"
+    if [[ -z "$cert_src" ]]; then
+      cert_src="$(ls -1 "$DEMO_DIR"/cert_*.crt "$DEMO_DIR"/cert_*.pem 2>/dev/null | head -n 1 || true)"
+    fi
     if [[ -n "$cert_src" ]]; then
       cp "$cert_src" "$DEMO_DIR/device-cert.pem"
       echo "Copied cert: $(basename "$cert_src") -> device-cert.pem"
@@ -96,7 +119,10 @@ if [[ "$NO_RENAME_CERTS" == "0" ]]; then
   fi
 
   if [[ ! -f "$DEMO_DIR/device-pkey.pem" ]]; then
-    key_src="$(ls -1 "$DEMO_DIR"/key_*.key "$DEMO_DIR"/key_*.pem 2>/dev/null | head -n 1 || true)"
+    key_src="$(ls -1 /tmp/pk_*.pem /tmp/key_*.key /tmp/key_*.pem 2>/dev/null | head -n 1 || true)"
+    if [[ -z "$key_src" ]]; then
+      key_src="$(ls -1 "$DEMO_DIR"/key_*.key "$DEMO_DIR"/key_*.pem 2>/dev/null | head -n 1 || true)"
+    fi
     if [[ -n "$key_src" ]]; then
       cp "$key_src" "$DEMO_DIR/device-pkey.pem"
       echo "Copied key: $(basename "$key_src") -> device-pkey.pem"

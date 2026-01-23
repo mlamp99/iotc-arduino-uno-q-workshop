@@ -50,24 +50,40 @@ chmod +x scripts/*.sh
 
 ---
 
-## Windows Step: Install Android Platform Tools (ADB) and push certs to the UNO Q
+## Windows Step: Find the UNO Q IP, then SCP certs to the UNO Q (minimal typing)
 
-Run this on the Windows laptop after you download the IOTCONNECT files:
+### 1) Get the UNO Q IP address
 
-```powershell
-cd C:\Users\<you>\Downloads
-git clone https://github.com/mlamp99/iotc-arduino-uno-q-workshop
-cd iotc-arduino-uno-q-workshop
+On the UNO Q terminal:
 
-.\scripts\windows\unoq_push_certs.ps1
+```bash
+hostname -I
 ```
 
-Notes:
-- The script will download Android Platform Tools if `adb` is not found.
-- It looks for `iotcDeviceConfig.json` and the latest `*cert*.zip` in your Downloads folder.
-- It extracts cert/key files, renames them to `device-cert.pem` and `device-pkey.pem`, and pushes them to `/home/arduino/demo`.
-- If your Downloads folder is different, run:
-  `.\scripts\windows\unoq_push_certs.ps1 -DownloadsDir "D:\Downloads"`
+If you see more than one IP, use the last one listed (example: `10.50.0.199`). Ignore `172.17.0.1` (that is the App Lab container bridge).
+
+### 2) Copy certs from Windows to the UNO Q
+
+Run these commands on the Windows laptop after you download the IOTCONNECT files.
+
+```powershell
+# 1) Send the config JSON from Downloads
+cd Downloads
+scp iotcDeviceConfig.json arduino@<UNOQ_IP>:/tmp/
+
+# 2) Send all files from the extracted certs folder
+# (folder name varies by device, so use the extracted *certificates* folder)
+cd Downloads\*certificates*
+scp * arduino@<UNOQ_IP>:/tmp/
+```
+
+Then on the UNO Q:
+
+```bash
+sudo ./scripts/unoq_setup.sh --demo-dir /home/arduino/demo
+```
+
+The setup script will find files in `/tmp`, rename as needed, and place them in `/home/arduino/demo`.
 
 ---
 
