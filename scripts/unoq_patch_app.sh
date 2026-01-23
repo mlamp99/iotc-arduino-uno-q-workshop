@@ -23,7 +23,7 @@ fi
 
 cp "$RELAY_SRC" "$RELAY_DST"
 
-python3 - <<'PY'
+python3 - "$MAIN_PY" <<'PY'
 from pathlib import Path
 import sys
 
@@ -71,6 +71,5 @@ new_lines = lines[:insert_at] + insert_block + lines[insert_at:]
 main_py.write_text("\n".join(new_lines) + "\n", encoding="utf-8")
 print("Inserted IoTConnect setup block.")
 PY
-"$MAIN_PY"
 
 echo "Patched: $MAIN_PY"
