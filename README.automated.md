@@ -29,7 +29,7 @@ On the laptop (manual):
    - `device-pkey.pem`
    Note: the downloaded cert files may include the device name (for example, `cert_unoQ2mcl.crt` and `key_unoQ2mcl.key`).
    The setup script will try to copy them to `device-cert.pem` and `device-pkey.pem` automatically.
-3) Copy those files to the UNO Q host, into `/home/arduino/demo`.
+3) Use the Windows helper script to install Android Platform Tools (ADB) and push the files to the UNO Q.
 
 On the UNO Q (manual once):
 - Arduino App Lab installed
@@ -47,6 +47,27 @@ cd iotc-arduino-uno-q-workshop
 
 chmod +x scripts/*.sh
 ```
+
+---
+
+## Windows Step: Install Android Platform Tools (ADB) and push certs to the UNO Q
+
+Run this on the Windows laptop after you download the IOTCONNECT files:
+
+```powershell
+cd C:\Users\<you>\Downloads
+git clone https://github.com/mlamp99/iotc-arduino-uno-q-workshop
+cd iotc-arduino-uno-q-workshop
+
+.\scripts\windows\unoq_push_certs.ps1
+```
+
+Notes:
+- The script will download Android Platform Tools if `adb` is not found.
+- It looks for `iotcDeviceConfig.json` and the latest `*cert*.zip` in your Downloads folder.
+- It extracts cert/key files, renames them to `device-cert.pem` and `device-pkey.pem`, and pushes them to `/home/arduino/demo`.
+- If your Downloads folder is different, run:
+  `.\scripts\windows\unoq_push_certs.ps1 -DownloadsDir "D:\Downloads"`
 
 ---
 
