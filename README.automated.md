@@ -96,6 +96,8 @@ cd /home/arduino/iotc-arduino-uno-q-workshop
 sudo ./scripts/unoq_setup.sh --demo-dir /home/arduino/demo
 ```
 
+If `iotc-socat.service` shows a bad unit file setting, re-run the setup script (it now installs a helper script for the ExecStartPre wait).
+
 Optional flags:
 - `--bridge-port 8899`
 - `--no-systemd` (skip service install/start)

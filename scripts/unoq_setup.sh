@@ -146,6 +146,19 @@ if [[ "$SKIP_SDK" == "0" ]]; then
 fi
 
 if [[ "$NO_SYSTEMD" == "0" ]]; then
+  cat > /usr/local/bin/iotc-wait-relay-sock.sh <<'EOF'
+#!/usr/bin/env bash
+set -e
+for _ in $(seq 1 30); do
+  if [[ -S /tmp/iotconnect-relay.sock ]]; then
+    exit 0
+  fi
+  sleep 1
+done
+exit 1
+EOF
+  chmod +x /usr/local/bin/iotc-wait-relay-sock.sh
+
   cat > /etc/systemd/system/iotc-relay.service <<EOF
 [Unit]
 Description=IoTConnect Relay Server
@@ -171,7 +184,7 @@ Requires=iotc-relay.service
 
 [Service]
 Type=simple
-ExecStartPre=/bin/sh -c 'for i in $(seq 1 30); do [ -S /tmp/iotconnect-relay.sock ] && exit 0; sleep 1; done; exit 1'
+ExecStartPre=/usr/local/bin/iotc-wait-relay-sock.sh
 ExecStart=/usr/bin/socat TCP-LISTEN:${BRIDGE_PORT},reuseaddr,fork UNIX-CONNECT:/tmp/iotconnect-relay.sock
 Restart=always
 RestartSec=3
