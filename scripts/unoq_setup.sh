@@ -7,13 +7,14 @@ SKIP_APT="0"
 NO_SYSTEMD="0"
 SKIP_SDK="0"
 NO_RENAME_CERTS="0"
+PIP_BREAK_SYSTEM_PACKAGES="0"
 
 RELAY_SERVER_URL="https://raw.githubusercontent.com/avnet-iotconnect/iotc-relay-service/main/relay-server/iotc-relay-server.py"
 RELAY_CLIENT_URL="https://raw.githubusercontent.com/avnet-iotconnect/iotc-relay-service/main/client-module/python/iotc_relay_client.py"
 
 usage() {
   cat <<EOF
-Usage: $0 [--demo-dir PATH] [--bridge-port PORT] [--skip-apt] [--no-systemd] [--skip-sdk] [--no-rename-certs]
+Usage: $0 [--demo-dir PATH] [--bridge-port PORT] [--skip-apt] [--no-systemd] [--skip-sdk] [--no-rename-certs] [--pip-break-system-packages]
 
   --demo-dir     Directory that contains iotcDeviceConfig.json and cert files
   --bridge-port  TCP port for the socat bridge (default: 8899)
@@ -21,6 +22,7 @@ Usage: $0 [--demo-dir PATH] [--bridge-port PORT] [--skip-apt] [--no-systemd] [--
   --no-systemd   Do not install or start systemd services
   --skip-sdk     Skip installing the IoTConnect Python Lite SDK
   --no-rename-certs  Do not try to rename device cert/key files in demo dir
+  --pip-break-system-packages  Allow pip to install system-wide packages
 EOF
 }
 
@@ -32,6 +34,7 @@ while [[ $# -gt 0 ]]; do
     --no-systemd) NO_SYSTEMD="1"; shift;;
     --skip-sdk) SKIP_SDK="1"; shift;;
     --no-rename-certs) NO_RENAME_CERTS="1"; shift;;
+    --pip-break-system-packages) PIP_BREAK_SYSTEM_PACKAGES="1"; shift;;
     -h|--help) usage; exit 0;;
     *) echo "Unknown arg: $1"; usage; exit 1;;
   esac
@@ -79,11 +82,6 @@ fi
 
 chmod +x "$DEMO_DIR/iotc-relay-server.py"
 
-if [[ "$SKIP_SDK" == "0" ]]; then
-  python3 -m pip install --upgrade pip
-  python3 -m pip install iotconnect-sdk-lite
-fi
-
 if [[ "$NO_RENAME_CERTS" == "0" ]]; then
   # If user copied files to /tmp via scp, pull them into the demo dir.
   if [[ -f "/tmp/iotcDeviceConfig.json" && ! -f "$DEMO_DIR/iotcDeviceConfig.json" ]]; then
@@ -130,6 +128,21 @@ if [[ "$NO_RENAME_CERTS" == "0" ]]; then
       echo "No key_*.key or key_*.pem found in $DEMO_DIR"
     fi
   fi
+fi
+
+if [[ "$SKIP_SDK" == "0" ]]; then
+  set +e
+  python3 -m pip install --upgrade pip
+  if [[ "$PIP_BREAK_SYSTEM_PACKAGES" == "1" ]]; then
+    python3 -m pip install --break-system-packages iotconnect-sdk-lite
+  else
+    python3 -m pip install iotconnect-sdk-lite
+  fi
+  if [[ $? -ne 0 ]]; then
+    echo "WARNING: SDK install failed (possibly due to externally managed env)."
+    echo "Re-run with --pip-break-system-packages or --skip-sdk."
+  fi
+  set -e
 fi
 
 if [[ "$NO_SYSTEMD" == "0" ]]; then

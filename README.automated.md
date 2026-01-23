@@ -102,6 +102,7 @@ Optional flags:
 - `--skip-apt` (skip apt install step)
 - `--skip-sdk` (skip IOTCONNECT Python Lite SDK install)
 - `--no-rename-certs` (skip renaming cert/key files in the demo dir)
+- `--pip-break-system-packages` (allow pip to install system-wide packages on Debian)
 
 ---
 
