@@ -25,11 +25,14 @@ def get_weather_forecast(city: str) -> str:
     print(f"Weather forecast for {city}: {forecast.description}")
 
     # Publish telemetry
-    relay.send_telemetry({
+    payload = {
         "city": city,
         "forecast_category": forecast.category,
         "forecast_description": forecast.description,
-    })
+    }
+    print("IOTCONNECT send:", payload)
+    ok = relay.send_telemetry(payload)
+    print("IOTCONNECT send result:", ok)
 
     return forecast.category
 

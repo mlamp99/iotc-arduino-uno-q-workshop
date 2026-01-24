@@ -88,14 +88,17 @@ def record_sensor_samples(celsius: float, humidity: float):
         ui.send_message('absolute_humidity', {"value": float(absolute_humidity), "ts": ts})
 
     # Publish telemetry to IOTCONNECT
-    relay.send_telemetry({
+    payload = {
         "temperature_c": float(celsius),
         "humidity": float(humidity),
         "dew_point": float(dew_point) if dew_point is not None else None,
         "heat_index": float(heat_index) if heat_index is not None else None,
         "absolute_humidity": float(absolute_humidity) if absolute_humidity is not None else None,
         "ts": ts,
-    })
+    }
+    print("IOTCONNECT send:", payload)
+    ok = relay.send_telemetry(payload)
+    print("IOTCONNECT send result:", ok)
 
 print("Registering 'record_sensor_samples' callback.")
 Bridge.provide("record_sensor_samples", record_sensor_samples)

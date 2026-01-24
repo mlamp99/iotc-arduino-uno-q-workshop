@@ -108,11 +108,14 @@ def get_air_quality():
     aqi_level = map_aqi_level(aqi)
 
     # Publish telemetry
-    relay.send_telemetry({
+    payload = {
         "city": city,
         "aqi": aqi,
         "aqi_level": aqi_level
-    })
+    }
+    print("IOTCONNECT send:", payload)
+    ok = relay.send_telemetry(payload)
+    print("IOTCONNECT send result:", ok)
 
     return aqi_level
 
