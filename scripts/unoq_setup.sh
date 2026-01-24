@@ -56,6 +56,21 @@ fi
 
 mkdir -p "$DEMO_DIR"
 
+# Some relay server builds expect /home/weston/demo by default. Provide a compatibility symlink.
+if [[ "$DEMO_DIR" != "/home/weston/demo" ]]; then
+  if [[ ! -e "/home/weston" ]]; then
+    mkdir -p /home/weston
+  fi
+  if [[ -L "/home/weston/demo" ]]; then
+    true
+  elif [[ -e "/home/weston/demo" ]]; then
+    true
+  else
+    ln -s "$DEMO_DIR" /home/weston/demo
+    echo "Created symlink: /home/weston/demo -> $DEMO_DIR"
+  fi
+fi
+
 if command -v curl >/dev/null 2>&1; then
   DL_CMD=(curl -fsSL)
 elif command -v wget >/dev/null 2>&1; then
