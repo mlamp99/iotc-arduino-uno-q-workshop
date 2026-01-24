@@ -42,6 +42,54 @@
             "description": "",
             "unit": "s",
             "aggregateTypes": []
+        },
+        {
+            "name": "class_name",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "confidence",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "processing_time_ms",
+            "displayName": "",
+            "type": "INTEGER",
+            "description": "",
+            "unit": "ms",
+            "aggregateTypes": []
+        },
+        {
+            "name": "input_type",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "selected_file",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "status",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
         }
     ]
 }

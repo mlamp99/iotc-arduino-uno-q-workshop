@@ -16,7 +16,23 @@
         {
             "name": "interval_sec",
             "type": "INTEGER"
+        },
+        {
+            "name": "detection_count",
+            "type": "INTEGER"
+        },
+        {
+            "name": "processing_time_ms",
+            "type": "INTEGER"
+        },
+        {
+            "name": "has_anomaly",
+            "type": "STRING"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
         }
     ],
-    "notes": "TODO: define telemetry keys and commands for this app"
+    "notes": "Concrete crack anomaly detection telemetry"
 }
