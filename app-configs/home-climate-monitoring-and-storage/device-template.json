@@ -1,0 +1,71 @@
+{
+    "code": "UnoQHomeClimate",
+    "name": "UnoQHomeClimateMonitoring",
+    "authType": 2,
+    "attributes": [
+        {
+            "name": "temperature_c",
+            "displayName": "",
+            "type": "NUMBER",
+            "description": "",
+            "unit": "C",
+            "aggregateTypes": []
+        },
+        {
+            "name": "humidity",
+            "displayName": "",
+            "type": "NUMBER",
+            "description": "",
+            "unit": "%",
+            "aggregateTypes": []
+        },
+        {
+            "name": "dew_point",
+            "displayName": "",
+            "type": "NUMBER",
+            "description": "",
+            "unit": "C",
+            "aggregateTypes": []
+        },
+        {
+            "name": "heat_index",
+            "displayName": "",
+            "type": "NUMBER",
+            "description": "",
+            "unit": "C",
+            "aggregateTypes": []
+        },
+        {
+            "name": "absolute_humidity",
+            "displayName": "",
+            "type": "NUMBER",
+            "description": "",
+            "unit": "g/m3",
+            "aggregateTypes": []
+        },
+        {
+            "name": "ts",
+            "displayName": "",
+            "type": "LONG",
+            "description": "",
+            "unit": "ms",
+            "aggregateTypes": []
+        }
+    ],
+    "commands": [],
+    "messageVersion": "2.1",
+    "msgCode": "TODO",
+    "capability": "0",
+    "enableCSR": "false",
+    "c2dOnDemand": 0,
+    "properties": {
+        "description": null,
+        "dataFrequency": "5",
+        "fileSupport": false,
+        "certRenewalDay": 0,
+        "enableCSR": false
+    },
+    "_meta": {
+        "version": "2.0"
+    }
+}

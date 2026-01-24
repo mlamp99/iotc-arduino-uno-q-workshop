@@ -1,0 +1,19 @@
+{
+    "example": "weather-forecast",
+    "telemetry": [
+        {
+            "name": "city",
+            "type": "STRING"
+        },
+        {
+            "name": "forecast_category",
+            "type": "STRING"
+        },
+        {
+            "name": "forecast_description",
+            "type": "STRING"
+        }
+    ],
+    "commands": [],
+    "notes": "Send telemetry from get_weather_forecast(city) when implemented"
+}

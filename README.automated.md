@@ -29,7 +29,7 @@ On the laptop (manual):
    - `device-pkey.pem`
    Note: the downloaded cert files may include the device name (for example, `cert_unoQ2mcl.crt` and `key_unoQ2mcl.key`).
    The setup script will try to copy them to `device-cert.pem` and `device-pkey.pem` automatically.
-3) Use the Windows helper script to install Android Platform Tools (ADB) and push the files to the UNO Q.
+3) Use the SCP commands below to push the files to the UNO Q.
 
 On the UNO Q (manual once):
 - Arduino App Lab installed
@@ -127,6 +127,8 @@ In Arduino App Lab:
 1) Browse examples from `app-bricks-examples`.
 2) Copy the selected app into your workspace.
 3) Note the app folder path (example: `/home/arduino/ArduinoApps/air-quality-monitoring`).
+4) Open the matching guide in `app-configs/<example>/README.md`.
+5) Use the placeholder template in `app-configs/<example>/device-template.json` and fill in telemetry + commands for your lab.
 
 ---
 
@@ -136,6 +138,12 @@ This copies the patched relay client into the app and inserts a minimal setup bl
 
 ```bash
 ./scripts/unoq_patch_app.sh /home/arduino/ArduinoApps/air-quality-monitoring
+```
+
+If your App Lab folder name differs from the example name, pass it explicitly:
+
+```bash
+./scripts/unoq_patch_app.sh /home/arduino/ArduinoApps/my-air-quality air-quality-monitoring
 ```
 
 After patching, open `python/main.py` and add telemetry calls where your app produces data:
@@ -167,6 +175,7 @@ Expected result: the selected App Lab example runs on the UNO Q and publishes te
 - `scripts/unoq_patch_app.sh <app_dir>`
   - Copies `app-lab/iotc_relay_client.py` into `<app_dir>/python/`
   - Inserts a minimal IOTCONNECT init block into `<app_dir>/python/main.py`
+  - Reads `app-configs/<example>/config.json` if present and prints telemetry/command hints
 
 - `scripts/unoq_verify.sh`
   - Verifies SDK import, relay socket, and TCP port

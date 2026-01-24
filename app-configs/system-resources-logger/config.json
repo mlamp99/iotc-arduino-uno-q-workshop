@@ -1,0 +1,10 @@
+{
+    "commands":  [
+
+                 ],
+    "example":  "system-resources-logger",
+    "telemetry":  [
+
+                  ],
+    "notes":  "TODO: define telemetry keys and commands for this app"
+}

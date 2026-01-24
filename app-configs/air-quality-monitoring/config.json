@@ -1,0 +1,26 @@
+{
+    "example": "air-quality-monitoring",
+    "telemetry": [
+        {
+            "name": "city",
+            "type": "STRING"
+        },
+        {
+            "name": "aqi",
+            "type": "INTEGER"
+        },
+        {
+            "name": "aqi_level",
+            "type": "STRING"
+        }
+    ],
+    "commands": [
+        {
+            "name": "set-city",
+            "parameters": [
+                "city"
+            ]
+        }
+    ],
+    "notes": "Matches AppLabUnoQ-airQualMon-device-template.JSON"
+}

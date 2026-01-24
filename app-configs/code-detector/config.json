@@ -1,0 +1,10 @@
+{
+    "commands":  [
+
+                 ],
+    "example":  "code-detector",
+    "telemetry":  [
+
+                  ],
+    "notes":  "TODO: define telemetry keys and commands for this app"
+}

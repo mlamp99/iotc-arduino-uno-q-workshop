@@ -1,0 +1,10 @@
+{
+    "commands":  [
+
+                 ],
+    "example":  "video-person-classification",
+    "telemetry":  [
+
+                  ],
+    "notes":  "TODO: define telemetry keys and commands for this app"
+}
