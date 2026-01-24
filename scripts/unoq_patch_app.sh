@@ -12,6 +12,7 @@ MAIN_PY="$APP_DIR/python/main.py"
 RELAY_SRC="$(cd "$(dirname "$0")/.." && pwd)/app-lab/iotc_relay_client.py"
 RELAY_DST="$APP_DIR/python/iotc_relay_client.py"
 CONFIG_PATH="$(cd "$(dirname "$0")/.." && pwd)/app-configs/$EXAMPLE_NAME/config.json"
+PREPATCH_MAIN="$(cd "$(dirname "$0")/.." && pwd)/app-configs/$EXAMPLE_NAME/python/main.py"
 
 if [[ ! -f "$MAIN_PY" ]]; then
   echo "main.py not found: $MAIN_PY"
@@ -24,6 +25,16 @@ if [[ ! -f "$RELAY_SRC" ]]; then
 fi
 
 cp "$RELAY_SRC" "$RELAY_DST"
+
+if [[ -f "$PREPATCH_MAIN" ]]; then
+  cp "$PREPATCH_MAIN" "$MAIN_PY"
+  echo "Applied pre-patched main.py: $PREPATCH_MAIN"
+  echo "Patched: $MAIN_PY"
+  if [[ -f "$CONFIG_PATH" ]]; then
+    echo "Config: $CONFIG_PATH"
+  fi
+  exit 0
+fi
 
 python3 - "$MAIN_PY" "$CONFIG_PATH" <<'PY'
 from pathlib import Path

@@ -134,7 +134,8 @@ In Arduino App Lab:
 
 ## Step 5: Patch the App Lab project for IOTCONNECT
 
-This copies the patched relay client into the app and inserts a minimal setup block into `python/main.py`.
+This copies the patched relay client into the app. If a pre-patched `main.py` exists in
+`app-configs/<example>/python/main.py`, it will overwrite your app’s `python/main.py`.
 
 ```bash
 ./scripts/unoq_patch_app.sh /home/arduino/ArduinoApps/air-quality-monitoring
