@@ -8,6 +8,11 @@
         }
     ],
     "example": "theremin",
-    "telemetry": [],
+    "telemetry": [
+        {
+            "name": "UnoQdemo",
+            "type": "STRING"
+        }
+    ],
     "notes": "TODO: define telemetry keys and commands for this app"
 }

@@ -13,6 +13,7 @@ from iotc_relay_client import IoTConnectRelayClient
 
 RELAY_ENDPOINT = "tcp://172.17.0.1:8899"
 RELAY_CLIENT_ID = "air_quality_led_matrix"
+UNOQ_DEMO_NAME = "air-quality-monitoring"
 IOTC_INTERVAL_SEC = 5
 IOTC_LAST_SEND = 0.0
 
@@ -123,6 +124,7 @@ def get_air_quality():
 
     # Publish telemetry (rate-limited)
     payload = {
+        "UnoQdemo": UNOQ_DEMO_NAME,
         "city": city,
         "aqi": aqi,
         "aqi_level": aqi_level

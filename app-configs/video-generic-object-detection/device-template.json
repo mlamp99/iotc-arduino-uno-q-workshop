@@ -26,5 +26,14 @@
     "capability": "0",
     "authType": 2,
     "code": "UnoQVGOD",
-    "attributes": []
+    "attributes": [
+        {
+            "name": "UnoQdemo",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        }
+    ]
 }

@@ -14,6 +14,7 @@ from iotc_relay_client import IoTConnectRelayClient
 
 RELAY_ENDPOINT = "tcp://172.17.0.1:8899"
 RELAY_CLIENT_ID = "home_climate"
+UNOQ_DEMO_NAME = "home-climate-monitoring-and-storage"
 IOTC_INTERVAL_SEC = 5
 IOTC_LAST_SEND = 0.0
 
@@ -106,6 +107,7 @@ def record_sensor_samples(celsius: float, humidity: float):
 
     # Publish telemetry to IOTCONNECT (rate-limited)
     payload = {
+        "UnoQdemo": UNOQ_DEMO_NAME,
         "temperature_c": float(celsius),
         "humidity": float(humidity),
         "dew_point": float(dew_point) if dew_point is not None else None,

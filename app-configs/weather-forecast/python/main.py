@@ -11,6 +11,7 @@ from iotc_relay_client import IoTConnectRelayClient
 
 RELAY_ENDPOINT = "tcp://172.17.0.1:8899"
 RELAY_CLIENT_ID = "weather_forecast"
+UNOQ_DEMO_NAME = "weather-forecast"
 IOTC_INTERVAL_SEC = 5
 IOTC_LAST_SEND = 0.0
 
@@ -43,6 +44,7 @@ def get_weather_forecast(city: str) -> str:
 
     # Publish telemetry (rate-limited)
     payload = {
+        "UnoQdemo": UNOQ_DEMO_NAME,
         "city": city,
         "forecast_category": forecast.category,
         "forecast_description": forecast.description,

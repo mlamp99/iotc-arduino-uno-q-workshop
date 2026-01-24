@@ -24,6 +24,10 @@
         {
             "name": "ts",
             "type": "INTEGER"
+        },
+        {
+            "name": "UnoQdemo",
+            "type": "STRING"
         }
     ],
     "commands": [

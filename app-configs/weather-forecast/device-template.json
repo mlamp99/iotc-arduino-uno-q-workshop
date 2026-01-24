@@ -26,6 +26,14 @@
             "description": "",
             "unit": "",
             "aggregateTypes": []
+        },
+        {
+            "name": "UnoQdemo",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
         }
     ],
     "commands": [

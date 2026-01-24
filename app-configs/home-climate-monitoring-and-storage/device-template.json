@@ -50,6 +50,14 @@
             "description": "",
             "unit": "ms",
             "aggregateTypes": []
+        },
+        {
+            "name": "UnoQdemo",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
         }
     ],
     "commands": [

@@ -12,6 +12,10 @@
         {
             "name": "aqi_level",
             "type": "STRING"
+        },
+        {
+            "name": "UnoQdemo",
+            "type": "STRING"
         }
     ],
     "commands": [

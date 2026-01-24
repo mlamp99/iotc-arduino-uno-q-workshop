@@ -12,6 +12,10 @@
         {
             "name": "forecast_description",
             "type": "STRING"
+        },
+        {
+            "name": "UnoQdemo",
+            "type": "STRING"
         }
     ],
     "commands": [
