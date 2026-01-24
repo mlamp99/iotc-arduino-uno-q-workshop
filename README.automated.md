@@ -79,11 +79,7 @@ scp * arduino@<UNOQ_IP>:/tmp/
 
 Then on the UNO Q:
 
-```bash
-sudo ./scripts/unoq_setup.sh --demo-dir /home/arduino/demo
-```
-
-The setup script will find files in `/tmp`, rename as needed, and place them in `/home/arduino/demo`.
+Continue to Step 2 to run the setup script.
 
 ---
 
