@@ -1,12 +1,12 @@
 {
-    "code": "UnoQHomeClimate",
-    "name": "UnoQHomeClimateMonitoring",
+    "code": "UnoQHC",
+    "name": "UnoQHomeClimate",
     "authType": 2,
     "attributes": [
         {
             "name": "temperature_c",
             "displayName": "",
-            "type": "NUMBER",
+            "type": "DECIMAL",
             "description": "",
             "unit": "C",
             "aggregateTypes": []
@@ -14,7 +14,7 @@
         {
             "name": "humidity",
             "displayName": "",
-            "type": "NUMBER",
+            "type": "DECIMAL",
             "description": "",
             "unit": "%",
             "aggregateTypes": []
@@ -22,7 +22,7 @@
         {
             "name": "dew_point",
             "displayName": "",
-            "type": "NUMBER",
+            "type": "DECIMAL",
             "description": "",
             "unit": "C",
             "aggregateTypes": []
@@ -30,7 +30,7 @@
         {
             "name": "heat_index",
             "displayName": "",
-            "type": "NUMBER",
+            "type": "DECIMAL",
             "description": "",
             "unit": "C",
             "aggregateTypes": []
@@ -38,7 +38,7 @@
         {
             "name": "absolute_humidity",
             "displayName": "",
-            "type": "NUMBER",
+            "type": "DECIMAL",
             "description": "",
             "unit": "g/m3",
             "aggregateTypes": []
@@ -46,7 +46,7 @@
         {
             "name": "ts",
             "displayName": "",
-            "type": "LONG",
+            "type": "INTEGER",
             "description": "",
             "unit": "ms",
             "aggregateTypes": []

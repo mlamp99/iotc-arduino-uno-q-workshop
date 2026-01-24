@@ -3,27 +3,27 @@
     "telemetry": [
         {
             "name": "temperature_c",
-            "type": "NUMBER"
+            "type": "DECIMAL"
         },
         {
             "name": "humidity",
-            "type": "NUMBER"
+            "type": "DECIMAL"
         },
         {
             "name": "dew_point",
-            "type": "NUMBER"
+            "type": "DECIMAL"
         },
         {
             "name": "heat_index",
-            "type": "NUMBER"
+            "type": "DECIMAL"
         },
         {
             "name": "absolute_humidity",
-            "type": "NUMBER"
+            "type": "DECIMAL"
         },
         {
             "name": "ts",
-            "type": "LONG"
+            "type": "INTEGER"
         }
     ],
     "commands": [],
