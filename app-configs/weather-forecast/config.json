@@ -28,6 +28,12 @@
             "parameters": [
                 "seconds"
             ]
+        },
+        {
+            "name": "set-city",
+            "parameters": [
+                "city"
+            ]
         }
     ],
     "notes": "Send telemetry from get_weather_forecast(city) when implemented"

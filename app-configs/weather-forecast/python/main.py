@@ -14,9 +14,10 @@ RELAY_CLIENT_ID = "weather_forecast"
 UNOQ_DEMO_NAME = "weather-forecast"
 IOTC_INTERVAL_SEC = 5
 IOTC_LAST_SEND = 0.0
+CITY_OVERRIDE = None
 
 def on_relay_command(command_name, parameters):
-    global IOTC_INTERVAL_SEC
+    global IOTC_INTERVAL_SEC, CITY_OVERRIDE
     print(f"IOTCONNECT command: {command_name} {parameters}")
     if command_name == "set-interval":
         try:
@@ -27,6 +28,15 @@ def on_relay_command(command_name, parameters):
             print(f"IOTCONNECT interval set to {IOTC_INTERVAL_SEC}s")
         except Exception as e:
             print(f"IOTCONNECT interval update failed: {e}")
+    elif command_name == "set-city":
+        try:
+            if isinstance(parameters, dict):
+                CITY_OVERRIDE = parameters.get("city")
+            else:
+                CITY_OVERRIDE = str(parameters).strip()
+            print(f"IOTCONNECT city override set to: {CITY_OVERRIDE}")
+        except Exception as e:
+            print(f"IOTCONNECT city update failed: {e}")
 
 relay = IoTConnectRelayClient(
     RELAY_ENDPOINT,
@@ -39,14 +49,15 @@ forecaster = WeatherForecast()
 
 
 def get_weather_forecast(city: str) -> str:
-    forecast = forecaster.get_forecast_by_city(city)
-    print(f"Weather forecast for {city}: {forecast.description}")
+    use_city = CITY_OVERRIDE or city
+    forecast = forecaster.get_forecast_by_city(use_city)
+    print(f"Weather forecast for {use_city}: {forecast.description}")
 
     # Publish telemetry (rate-limited)
     payload = {
         "UnoQdemo": UNOQ_DEMO_NAME,
         "interval_sec": int(IOTC_INTERVAL_SEC),
-        "city": city,
+        "city": use_city,
         "forecast_category": forecast.category,
         "forecast_description": forecast.description,
     }
