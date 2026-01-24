@@ -188,3 +188,31 @@ Expected result: the selected App Lab example runs on the UNO Q and publishes te
 - If systemd is not available, run these manually:
   - `python3 /home/arduino/demo/iotc-relay-server.py`
   - `sudo socat TCP-LISTEN:8899,reuseaddr,fork UNIX-CONNECT:/tmp/iotconnect-relay.sock`
+
+---
+
+## Service control (manual start/stop)
+
+To disconnect your device from IOTCONNECT, stop the relay service:
+
+```bash
+sudo systemctl stop iotc-relay
+```
+
+To stop the TCP bridge:
+
+```bash
+sudo systemctl stop iotc-socat
+```
+
+To start them again:
+
+```bash
+sudo systemctl start iotc-relay iotc-socat
+```
+
+To restart:
+
+```bash
+sudo systemctl restart iotc-relay iotc-socat
+```
