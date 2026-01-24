@@ -34,6 +34,14 @@
             "description": "",
             "unit": "",
             "aggregateTypes": []
+        },
+        {
+            "name": "interval_sec",
+            "displayName": "",
+            "type": "INTEGER",
+            "description": "",
+            "unit": "s",
+            "aggregateTypes": []
         }
     ],
     "commands": [

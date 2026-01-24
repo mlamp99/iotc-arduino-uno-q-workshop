@@ -28,6 +28,10 @@
         {
             "name": "UnoQdemo",
             "type": "STRING"
+        },
+        {
+            "name": "interval_sec",
+            "type": "INTEGER"
         }
     ],
     "commands": [

@@ -45,6 +45,7 @@ def get_weather_forecast(city: str) -> str:
     # Publish telemetry (rate-limited)
     payload = {
         "UnoQdemo": UNOQ_DEMO_NAME,
+        "interval_sec": int(IOTC_INTERVAL_SEC),
         "city": city,
         "forecast_category": forecast.category,
         "forecast_description": forecast.description,

@@ -12,6 +12,10 @@
         {
             "name": "UnoQdemo",
             "type": "STRING"
+        },
+        {
+            "name": "interval_sec",
+            "type": "INTEGER"
         }
     ],
     "notes": "TODO: define telemetry keys and commands for this app"

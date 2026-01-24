@@ -108,6 +108,7 @@ def record_sensor_samples(celsius: float, humidity: float):
     # Publish telemetry to IOTCONNECT (rate-limited)
     payload = {
         "UnoQdemo": UNOQ_DEMO_NAME,
+        "interval_sec": int(IOTC_INTERVAL_SEC),
         "temperature_c": float(celsius),
         "humidity": float(humidity),
         "dew_point": float(dew_point) if dew_point is not None else None,

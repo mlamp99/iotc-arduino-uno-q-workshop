@@ -125,6 +125,7 @@ def get_air_quality():
     # Publish telemetry (rate-limited)
     payload = {
         "UnoQdemo": UNOQ_DEMO_NAME,
+        "interval_sec": int(IOTC_INTERVAL_SEC),
         "city": city,
         "aqi": aqi,
         "aqi_level": aqi_level
