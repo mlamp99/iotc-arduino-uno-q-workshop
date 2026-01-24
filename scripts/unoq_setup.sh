@@ -7,7 +7,7 @@ SKIP_APT="0"
 NO_SYSTEMD="0"
 SKIP_SDK="0"
 NO_RENAME_CERTS="0"
-PIP_BREAK_SYSTEM_PACKAGES="0"
+PIP_BREAK_SYSTEM_PACKAGES="1"
 
 RELAY_SERVER_URL="https://raw.githubusercontent.com/avnet-iotconnect/iotc-relay-service/main/relay-server/iotc-relay-server.py"
 RELAY_CLIENT_URL="https://raw.githubusercontent.com/avnet-iotconnect/iotc-relay-service/main/client-module/python/iotc_relay_client.py"

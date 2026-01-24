@@ -87,7 +87,7 @@ The setup script will find files in `/tmp`, rename as needed, and place them in 
 
 ---
 
-## Step 2: Run the automated host setup
+## Step 2: Run the automated host setup (if you have not already)
 
 This installs the IOTCONNECT Python Lite SDK, installs socat, downloads the relay server + client, and sets up systemd services.
 
@@ -104,7 +104,7 @@ Optional flags:
 - `--skip-apt` (skip apt install step)
 - `--skip-sdk` (skip IOTCONNECT Python Lite SDK install)
 - `--no-rename-certs` (skip renaming cert/key files in the demo dir)
-- `--pip-break-system-packages` (allow pip to install system-wide packages on Debian)
+- `--pip-break-system-packages` (default; allow pip to install system-wide packages on Debian)
 
 ---
 
