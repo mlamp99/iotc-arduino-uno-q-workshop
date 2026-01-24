@@ -13,6 +13,8 @@ from iotc_relay_client import IoTConnectRelayClient
 
 RELAY_ENDPOINT = "tcp://172.17.0.1:8899"
 RELAY_CLIENT_ID = "air_quality_led_matrix"
+IOTC_INTERVAL_SEC = 5
+IOTC_LAST_SEND = 0.0
 
 # Insert your API token here
 API_TOKEN = "demo"
@@ -42,8 +44,20 @@ except Exception as e:
 # ---- Command handler from IOTCONNECT (via relay server) ----
 def on_relay_command(command_name: str, parameters):
     global city
+    global IOTC_INTERVAL_SEC
 
     print("Received relay command:", command_name, parameters)
+
+    if command_name == "set-interval":
+        try:
+            if isinstance(parameters, dict):
+                IOTC_INTERVAL_SEC = int(parameters.get("seconds", IOTC_INTERVAL_SEC))
+            else:
+                IOTC_INTERVAL_SEC = int(str(parameters).strip())
+            print(f"IOTCONNECT interval set to {IOTC_INTERVAL_SEC}s")
+        except Exception as e:
+            print(f"IOTCONNECT interval update failed: {e}")
+        return
 
     # Example command: set-city  (parameters: {"city":"Chicago"} or "Chicago")
     if command_name == "set-city":
@@ -107,15 +121,18 @@ def get_air_quality():
     aqi = data.get("aqi", -1)
     aqi_level = map_aqi_level(aqi)
 
-    # Publish telemetry
+    # Publish telemetry (rate-limited)
     payload = {
         "city": city,
         "aqi": aqi,
         "aqi_level": aqi_level
     }
-    print("IOTCONNECT send:", payload)
-    ok = relay.send_telemetry(payload)
-    print("IOTCONNECT send result:", ok)
+    now = time.time()
+    if now - IOTC_LAST_SEND >= IOTC_INTERVAL_SEC:
+        print("IOTCONNECT send:", payload)
+        ok = relay.send_telemetry(payload)
+        print("IOTCONNECT send result:", ok)
+        globals()["IOTC_LAST_SEND"] = now
 
     return aqi_level
 

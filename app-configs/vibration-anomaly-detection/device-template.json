@@ -13,7 +13,15 @@
         "enableCSR": false,
         "certRenewalDay": 0
     },
-    "commands": [],
+    "commands": [
+        {
+            "name": "set-interval",
+            "command": "set-interval",
+            "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
+        }
+    ],
     "name": "UnoQVibrationAnomalyDete",
     "capability": "0",
     "authType": 2,

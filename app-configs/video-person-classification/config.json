@@ -1,10 +1,13 @@
 {
-    "commands":  [
-
-                 ],
-    "example":  "video-person-classification",
-    "telemetry":  [
-
-                  ],
-    "notes":  "TODO: define telemetry keys and commands for this app"
+    "commands": [
+        {
+            "name": "set-interval",
+            "parameters": [
+                "seconds"
+            ]
+        }
+    ],
+    "example": "video-person-classification",
+    "telemetry": [],
+    "notes": "TODO: define telemetry keys and commands for this app"
 }

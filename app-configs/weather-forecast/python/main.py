@@ -4,16 +4,33 @@
 
 from arduino.app_bricks.weather_forecast import WeatherForecast
 from arduino.app_utils import *
+import time
 
 # ---- IOTCONNECT Relay (App Lab TCP bridge) ----
 from iotc_relay_client import IoTConnectRelayClient
 
 RELAY_ENDPOINT = "tcp://172.17.0.1:8899"
 RELAY_CLIENT_ID = "weather_forecast"
+IOTC_INTERVAL_SEC = 5
+IOTC_LAST_SEND = 0.0
+
+def on_relay_command(command_name, parameters):
+    global IOTC_INTERVAL_SEC
+    print(f"IOTCONNECT command: {command_name} {parameters}")
+    if command_name == "set-interval":
+        try:
+            if isinstance(parameters, dict):
+                IOTC_INTERVAL_SEC = int(parameters.get("seconds", IOTC_INTERVAL_SEC))
+            else:
+                IOTC_INTERVAL_SEC = int(str(parameters).strip())
+            print(f"IOTCONNECT interval set to {IOTC_INTERVAL_SEC}s")
+        except Exception as e:
+            print(f"IOTCONNECT interval update failed: {e}")
 
 relay = IoTConnectRelayClient(
     RELAY_ENDPOINT,
     client_id=RELAY_CLIENT_ID,
+    command_callback=on_relay_command
 )
 relay.start()
 
@@ -24,15 +41,18 @@ def get_weather_forecast(city: str) -> str:
     forecast = forecaster.get_forecast_by_city(city)
     print(f"Weather forecast for {city}: {forecast.description}")
 
-    # Publish telemetry
+    # Publish telemetry (rate-limited)
     payload = {
         "city": city,
         "forecast_category": forecast.category,
         "forecast_description": forecast.description,
     }
-    print("IOTCONNECT send:", payload)
-    ok = relay.send_telemetry(payload)
-    print("IOTCONNECT send result:", ok)
+    now = time.time()
+    if now - IOTC_LAST_SEND >= IOTC_INTERVAL_SEC:
+        print("IOTCONNECT send:", payload)
+        ok = relay.send_telemetry(payload)
+        print("IOTCONNECT send result:", ok)
+        globals()["IOTC_LAST_SEND"] = now
 
     return forecast.category
 

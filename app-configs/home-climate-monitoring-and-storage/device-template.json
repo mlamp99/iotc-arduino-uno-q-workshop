@@ -52,7 +52,15 @@
             "aggregateTypes": []
         }
     ],
-    "commands": [],
+    "commands": [
+        {
+            "name": "set-interval",
+            "command": "set-interval",
+            "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
+        }
+    ],
     "messageVersion": "2.1",
     "msgCode": "TODO",
     "capability": "0",

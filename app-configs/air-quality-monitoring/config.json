@@ -20,6 +20,12 @@
             "parameters": [
                 "city"
             ]
+        },
+        {
+            "name": "set-interval",
+            "parameters": [
+                "seconds"
+            ]
         }
     ],
     "notes": "Matches AppLabUnoQ-airQualMon-device-template.JSON"

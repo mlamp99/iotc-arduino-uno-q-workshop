@@ -26,6 +26,13 @@
             "type": "INTEGER"
         }
     ],
-    "commands": [],
+    "commands": [
+        {
+            "name": "set-interval",
+            "parameters": [
+                "seconds"
+            ]
+        }
+    ],
     "notes": "Send telemetry in record_sensor_samples(celsius, humidity)"
 }

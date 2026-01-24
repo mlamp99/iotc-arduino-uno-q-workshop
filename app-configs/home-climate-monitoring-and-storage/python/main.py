@@ -7,16 +7,33 @@ import math
 from arduino.app_bricks.dbstorage_tsstore import TimeSeriesStore
 from arduino.app_bricks.web_ui import WebUI
 from arduino.app_utils import App, Bridge
+import time
 
 # ---- IOTCONNECT Relay (App Lab TCP bridge) ----
 from iotc_relay_client import IoTConnectRelayClient
 
 RELAY_ENDPOINT = "tcp://172.17.0.1:8899"
 RELAY_CLIENT_ID = "home_climate"
+IOTC_INTERVAL_SEC = 5
+IOTC_LAST_SEND = 0.0
+
+def on_relay_command(command_name, parameters):
+    global IOTC_INTERVAL_SEC
+    print(f"IOTCONNECT command: {command_name} {parameters}")
+    if command_name == "set-interval":
+        try:
+            if isinstance(parameters, dict):
+                IOTC_INTERVAL_SEC = int(parameters.get("seconds", IOTC_INTERVAL_SEC))
+            else:
+                IOTC_INTERVAL_SEC = int(str(parameters).strip())
+            print(f"IOTCONNECT interval set to {IOTC_INTERVAL_SEC}s")
+        except Exception as e:
+            print(f"IOTCONNECT interval update failed: {e}")
 
 relay = IoTConnectRelayClient(
     RELAY_ENDPOINT,
     client_id=RELAY_CLIENT_ID,
+    command_callback=on_relay_command
 )
 relay.start()
 
@@ -87,7 +104,7 @@ def record_sensor_samples(celsius: float, humidity: float):
         db.write_sample("absolute_humidity", float(absolute_humidity), ts)
         ui.send_message('absolute_humidity', {"value": float(absolute_humidity), "ts": ts})
 
-    # Publish telemetry to IOTCONNECT
+    # Publish telemetry to IOTCONNECT (rate-limited)
     payload = {
         "temperature_c": float(celsius),
         "humidity": float(humidity),
@@ -96,9 +113,12 @@ def record_sensor_samples(celsius: float, humidity: float):
         "absolute_humidity": float(absolute_humidity) if absolute_humidity is not None else None,
         "ts": ts,
     }
-    print("IOTCONNECT send:", payload)
-    ok = relay.send_telemetry(payload)
-    print("IOTCONNECT send result:", ok)
+    now = time.time()
+    if now - IOTC_LAST_SEND >= IOTC_INTERVAL_SEC:
+        print("IOTCONNECT send:", payload)
+        ok = relay.send_telemetry(payload)
+        print("IOTCONNECT send result:", ok)
+        globals()["IOTC_LAST_SEND"] = now
 
 print("Registering 'record_sensor_samples' callback.")
 Bridge.provide("record_sensor_samples", record_sensor_samples)

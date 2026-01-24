@@ -35,6 +35,13 @@
             "requiredParam": true,
             "requiredAck": true,
             "isOTACommand": false
+        },
+        {
+            "name": "set-interval",
+            "command": "set-interval",
+            "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
         }
     ],
     "messageVersion": "2.1",

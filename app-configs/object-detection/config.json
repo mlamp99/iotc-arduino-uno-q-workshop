@@ -1,10 +1,13 @@
 {
-    "commands":  [
-
-                 ],
-    "example":  "object-detection",
-    "telemetry":  [
-
-                  ],
-    "notes":  "TODO: define telemetry keys and commands for this app"
+    "commands": [
+        {
+            "name": "set-interval",
+            "parameters": [
+                "seconds"
+            ]
+        }
+    ],
+    "example": "object-detection",
+    "telemetry": [],
+    "notes": "TODO: define telemetry keys and commands for this app"
 }
