@@ -5,6 +5,12 @@
             "parameters": [
                 "seconds"
             ]
+        },
+        {
+            "name": "set-confidence",
+            "parameters": [
+                "confidence"
+            ]
         }
     ],
     "example": "image-classification",
@@ -16,7 +22,35 @@
         {
             "name": "interval_sec",
             "type": "INTEGER"
+        },
+        {
+            "name": "class_name",
+            "type": "STRING"
+        },
+        {
+            "name": "confidence",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "processing_time_ms",
+            "type": "INTEGER"
+        },
+        {
+            "name": "input_type",
+            "type": "STRING"
+        },
+        {
+            "name": "image_type",
+            "type": "STRING"
+        },
+        {
+            "name": "results_json",
+            "type": "STRING"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
         }
     ],
-    "notes": "TODO: define telemetry keys and commands for this app"
+    "notes": "Image classification telemetry"
 }

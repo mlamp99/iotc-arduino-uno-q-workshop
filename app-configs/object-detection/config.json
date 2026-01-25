@@ -5,6 +5,12 @@
             "parameters": [
                 "seconds"
             ]
+        },
+        {
+            "name": "set-confidence",
+            "parameters": [
+                "confidence"
+            ]
         }
     ],
     "example": "object-detection",
@@ -16,7 +22,43 @@
         {
             "name": "interval_sec",
             "type": "INTEGER"
+        },
+        {
+            "name": "detection_count",
+            "type": "INTEGER"
+        },
+        {
+            "name": "processing_time_ms",
+            "type": "INTEGER"
+        },
+        {
+            "name": "has_objects",
+            "type": "STRING"
+        },
+        {
+            "name": "confidence",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "max_confidence",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "avg_confidence",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "detections_json",
+            "type": "STRING"
+        },
+        {
+            "name": "input_type",
+            "type": "STRING"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
         }
     ],
-    "notes": "TODO: define telemetry keys and commands for this app"
+    "notes": "Object detection telemetry"
 }
