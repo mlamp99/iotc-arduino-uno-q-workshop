@@ -98,6 +98,7 @@ def on_run_classification(sid, data):
         if input_audio:
             start_time = time.time() * 1000
             results = AudioClassification.classify_from_file(input_audio, confidence)
+            print("RAW RESULTS:", results)
             diff = time.time() * 1000 - start_time
 
             response_data = { 'results': results, 'processing_time': diff }
