@@ -15,13 +15,6 @@
     },
     "commands": [
         {
-            "name": "set-interval",
-            "command": "set-interval",
-            "requiredParam": true,
-            "requiredAck": true,
-            "isOTACommand": false
-        },
-        {
             "name": "set-confidence",
             "command": "set-confidence",
             "requiredParam": true,
@@ -40,14 +33,6 @@
             "type": "STRING",
             "description": "",
             "unit": "",
-            "aggregateTypes": []
-        },
-        {
-            "name": "interval_sec",
-            "displayName": "",
-            "type": "INTEGER",
-            "description": "",
-            "unit": "s",
             "aggregateTypes": []
         },
         {

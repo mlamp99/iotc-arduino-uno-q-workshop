@@ -18,8 +18,6 @@ from iotc_relay_client import IoTConnectRelayClient
 RELAY_ENDPOINT = "tcp://172.17.0.1:8899"
 RELAY_CLIENT_ID = "image_classification"
 UNOQ_DEMO_NAME = "image-classification"
-IOTC_INTERVAL_SEC = 5
-IOTC_LAST_SEND = 0.0
 DEFAULT_CONFIDENCE = 0.25
 CURRENT_CONFIDENCE = DEFAULT_CONFIDENCE
 
@@ -27,18 +25,9 @@ image_classification = ImageClassification()
 
 
 def on_relay_command(command_name, parameters):
-    global IOTC_INTERVAL_SEC, CURRENT_CONFIDENCE
+    global CURRENT_CONFIDENCE
     print(f"IOTCONNECT command: {command_name} {parameters}")
-    if command_name == "set-interval":
-        try:
-            if isinstance(parameters, dict):
-                IOTC_INTERVAL_SEC = int(parameters.get("seconds", IOTC_INTERVAL_SEC))
-            else:
-                IOTC_INTERVAL_SEC = int(str(parameters).strip())
-            print(f"IOTCONNECT interval set to {IOTC_INTERVAL_SEC}s")
-        except Exception as e:
-            print(f"IOTCONNECT interval update failed: {e}")
-    elif command_name == "set-confidence":
+    if command_name == "set-confidence":
         try:
             if isinstance(parameters, dict):
                 val = parameters.get("confidence", CURRENT_CONFIDENCE)
@@ -59,13 +48,7 @@ relay.start()
 
 
 def send_telemetry(payload):
-    global IOTC_LAST_SEND
-    now = time.time()
-    if now - IOTC_LAST_SEND < IOTC_INTERVAL_SEC:
-        return False
     payload.setdefault("UnoQdemo", UNOQ_DEMO_NAME)
-    payload["interval_sec"] = int(IOTC_INTERVAL_SEC)
-    IOTC_LAST_SEND = now
     print("IOTCONNECT send:", payload)
     ok = relay.send_telemetry(payload)
     print("IOTCONNECT send result:", ok)
@@ -82,6 +65,10 @@ def parse_data(data):
 
 
 def pick_top_result(results):
+    if isinstance(results, dict) and isinstance(results.get("classification"), list):
+        first = results.get("classification")[0] if results.get("classification") else None
+        if isinstance(first, dict):
+            return first.get("class_name") or first.get("label"), first.get("confidence") or first.get("score")
     if isinstance(results, dict):
         if 'class_name' in results and 'confidence' in results:
             return results.get('class_name'), results.get('confidence')

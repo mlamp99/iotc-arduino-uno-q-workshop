@@ -1,12 +1,6 @@
 {
     "commands": [
         {
-            "name": "set-interval",
-            "parameters": [
-                "seconds"
-            ]
-        },
-        {
             "name": "set-confidence",
             "parameters": [
                 "confidence"
@@ -18,10 +12,6 @@
         {
             "name": "UnoQdemo",
             "type": "STRING"
-        },
-        {
-            "name": "interval_sec",
-            "type": "INTEGER"
         },
         {
             "name": "detection_count",
