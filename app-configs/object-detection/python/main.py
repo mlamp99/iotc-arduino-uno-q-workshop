@@ -206,6 +206,17 @@ def on_detect_objects(client_id, data):
         max_conf = max(confs) if confs else 0.0
         avg_conf = (sum(confs) / len(confs)) if confs else 0.0
 
+        # build top-4 discrete fields for dashboards
+        top = sorted(detections, key=lambda d: d.get("confidence", 0), reverse=True)[:4]
+        slots = {}
+        for i in range(4):
+            if i < len(top):
+                slots[f"class_name_{i+1}"] = top[i].get("class_name", "")
+                slots[f"confidence_{i+1}"] = float(top[i].get("confidence", 0))
+            else:
+                slots[f"class_name_{i+1}"] = ""
+                slots[f"confidence_{i+1}"] = 0.0
+
         response = {
             'success': True,
             'result_image': b64_result,
@@ -224,6 +235,7 @@ def on_detect_objects(client_id, data):
             "avg_confidence": float(avg_conf),
             "detections_json": json.dumps(detections),
             "input_type": input_type,
+            **slots,
         })
 
     except Exception as e:

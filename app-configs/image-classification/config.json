@@ -50,6 +50,14 @@
         {
             "name": "status",
             "type": "STRING"
+        },
+        {
+            "name": "top_class_name",
+            "type": "STRING"
+        },
+        {
+            "name": "top_confidence",
+            "type": "DECIMAL"
         }
     ],
     "notes": "Image classification telemetry"

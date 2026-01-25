@@ -175,6 +175,8 @@ def on_classify_image(client_id, data):
             "input_type": input_type,
             "image_type": image_type,
             "results_json": json.dumps(results),
+            "top_class_name": class_name or "",
+            "top_confidence": float(top_conf) if top_conf is not None else float(confidence),
         })
 
     except Exception as e:
