@@ -96,8 +96,11 @@ def normalize_results(results):
     if results is None:
         return detections
 
-    # If wrapped in dict with anomalies key
-    if isinstance(results, dict) and isinstance(results.get("anomalies"), list):
+    # If wrapped in dict with detection key (current model)
+    if isinstance(results, dict) and isinstance(results.get("detection"), list):
+        results_list = results.get("detection")
+    # If wrapped in dict with anomalies key (other models)
+    elif isinstance(results, dict) and isinstance(results.get("anomalies"), list):
         results_list = results.get("anomalies")
     elif isinstance(results, list):
         results_list = results
@@ -109,10 +112,17 @@ def normalize_results(results):
             continue
         conf = r.get("confidence", r.get("score", r.get("prob", r.get("p"))))
         bbox = r.get("bbox")
+        bbox_xyxy = r.get("bounding_box_xyxy")
         det = {}
         if conf is not None:
             det["confidence"] = float(conf)
-        if isinstance(bbox, (list, tuple)) and len(bbox) >= 4:
+        if isinstance(bbox_xyxy, (list, tuple)) and len(bbox_xyxy) >= 4:
+            x1, y1, x2, y2 = bbox_xyxy[0], bbox_xyxy[1], bbox_xyxy[2], bbox_xyxy[3]
+            det["x"] = x1
+            det["y"] = y1
+            det["w"] = max(0.0, x2 - x1)
+            det["h"] = max(0.0, y2 - y1)
+        elif isinstance(bbox, (list, tuple)) and len(bbox) >= 4:
             det["x"], det["y"], det["w"], det["h"] = bbox[0], bbox[1], bbox[2], bbox[3]
         else:
             for k in ("x", "y", "w", "h"):
@@ -205,21 +215,21 @@ def on_detect_anomalies(client_id, data):
         response = {
             'success': True,
             'result_image': b64_result,
-            'detection_count': len(results) if results else 0,
+            'detection_count': len(results.get("detection", [])) if isinstance(results, dict) else (len(results) if results else 0),
             'processing_time': f"{diff:.2f} ms"
         }
         ui.send_message('detection_result', response)
 
         detections = normalize_results(results)
         confs = [d.get("confidence") for d in detections if isinstance(d.get("confidence"), (int, float))]
-        max_conf = max(confs) if confs else 0.0
-        avg_conf = (sum(confs) / len(confs)) if confs else 0.0
+        max_conf = max(confs) if confs else float(results.get("anomaly_max_score", 0.0)) if isinstance(results, dict) else 0.0
+        avg_conf = (sum(confs) / len(confs)) if confs else float(results.get("anomaly_mean_score", 0.0)) if isinstance(results, dict) else 0.0
 
         send_telemetry({
             "status": "ok",
-            "detection_count": len(results) if results else 0,
+            "detection_count": len(detections),
             "processing_time_ms": int(diff),
-            "has_anomaly": "true" if (results and len(results) > 0) else "false",
+            "has_anomaly": "true" if (detections and len(detections) > 0) else "false",
             "confidence": float(confidence) if confidence is not None else 0.0,
             "max_confidence": float(max_conf),
             "avg_confidence": float(avg_conf),
