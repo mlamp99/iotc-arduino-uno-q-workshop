@@ -1,9 +1,10 @@
 {
     "commands": [
         {
-            "name": "set-interval",
+            "name": "set-pin",
             "parameters": [
-                "seconds"
+                "name",
+                "state"
             ]
         }
     ],
@@ -14,9 +15,17 @@
             "type": "STRING"
         },
         {
-            "name": "interval_sec",
-            "type": "INTEGER"
+            "name": "pin_name",
+            "type": "STRING"
+        },
+        {
+            "name": "pin_state",
+            "type": "STRING"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
         }
     ],
-    "notes": "TODO: define telemetry keys and commands for this app"
+    "notes": "Pin toggle telemetry"
 }

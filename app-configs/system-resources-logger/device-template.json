@@ -42,6 +42,38 @@
             "description": "",
             "unit": "s",
             "aggregateTypes": []
+        },
+        {
+            "name": "cpu_percent",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "%",
+            "aggregateTypes": []
+        },
+        {
+            "name": "mem_percent",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "%",
+            "aggregateTypes": []
+        },
+        {
+            "name": "ts",
+            "displayName": "",
+            "type": "INTEGER",
+            "description": "",
+            "unit": "ms",
+            "aggregateTypes": []
+        },
+        {
+            "name": "status",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
         }
     ]
 }

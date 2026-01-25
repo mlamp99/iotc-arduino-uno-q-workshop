@@ -16,7 +16,23 @@
         {
             "name": "interval_sec",
             "type": "INTEGER"
+        },
+        {
+            "name": "cpu_percent",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "mem_percent",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "ts",
+            "type": "INTEGER"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
         }
     ],
-    "notes": "TODO: define telemetry keys and commands for this app"
+    "notes": "System resources telemetry"
 }

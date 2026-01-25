@@ -20,6 +20,13 @@
             "requiredParam": true,
             "requiredAck": true,
             "isOTACommand": false
+        },
+        {
+            "name": "set-led",
+            "command": "set-led",
+            "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
         }
     ],
     "name": "UnoQBlink",
@@ -41,6 +48,22 @@
             "type": "INTEGER",
             "description": "",
             "unit": "s",
+            "aggregateTypes": []
+        },
+        {
+            "name": "led_state",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "status",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
             "aggregateTypes": []
         }
     ]

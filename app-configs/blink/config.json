@@ -5,6 +5,12 @@
             "parameters": [
                 "seconds"
             ]
+        },
+        {
+            "name": "set-led",
+            "parameters": [
+                "state"
+            ]
         }
     ],
     "example": "blink",
@@ -16,7 +22,15 @@
         {
             "name": "interval_sec",
             "type": "INTEGER"
+        },
+        {
+            "name": "led_state",
+            "type": "STRING"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
         }
     ],
-    "notes": "TODO: define telemetry keys and commands for this app"
+    "notes": "Blink telemetry"
 }
