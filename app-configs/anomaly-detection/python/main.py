@@ -171,6 +171,7 @@ def on_detect_anomalies(client_id, data):
 
         start_time = time.time() * 1000
         results = anomaly_detection.detect(pil_image)
+        print("RAW RESULTS:", results)
         diff = time.time() * 1000 - start_time
 
         if results is None:
