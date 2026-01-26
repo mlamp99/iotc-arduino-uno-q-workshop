@@ -26,31 +26,31 @@ Follow these once on your Windows laptop before starting Step 1.
 
 1) Install Arduino App Lab on your PC:
    - https://www.arduino.cc/en/software/#app-lab-section
-   ![Arduino App Lab download](images/Arduino-App-Lab.png)
-   ![App Lab download page](images/app-lab-downlowad.png)
-   ![App Lab name screen](images/app-lab-1-name.png)
+   <img src="images/Arduino-App-Lab.png" alt="Arduino App Lab download" width="700">
+   <img src="images/app-lab-downlowad.png" alt="App Lab download page" width="700">
+   <img src="images/app-lab-1-name.png" alt="App Lab name screen" width="700">
 
 2) Connect the UNO Q to your PC with a USB cable.
-   ![Connect to board](images/app-lab-connect.png)
+   <img src="images/app-lab-connect.png" alt="Connect to board" width="700">
 
 3) Enter your Wi-Fi credentials and set up connectivity.
-   ![Enter network credentials](images/app-lab-2-network.png)
-   ![Input password](images/app-lab-5-input-password.png)
+   <img src="images/app-lab-2-network.png" alt="Enter network credentials" width="700">
+   <img src="images/app-lab-5-input-password.png" alt="Input password" width="700">
 
 4) Update the board when prompted.
-   ![Updates available](images/app-lab-3-updates.png)
-   ![Install updates](images/app-lab-4-install-updates.png)
+   <img src="images/app-lab-3-updates.png" alt="Updates available" width="700">
+   <img src="images/app-lab-4-install-updates.png" alt="Install updates" width="700">
 
 5) Restart the board.
-   ![Restart services](images/app-lab-iotcscript-restart-services.png)
+   <img src="images/app-lab-iotcscript-restart-services.png" alt="Restart services" width="700">
 
 6) Reconnect to the board.
 
 7) In App Lab, open Examples to view all available apps.
-   ![Examples list](images/app-lab-7-examples.png)
+   <img src="images/app-lab-7-examples.png" alt="Examples list" width="700">
 
 7a) Open the App Lab terminal (useful for running commands on the UNO Q).
-   ![Open terminal](images/app-lab-8-openterminal.png)
+   <img src="images/app-lab-8-openterminal.png" alt="Open terminal" width="700">
 
 8) Open IOTCONNECT at `console.iotconnect.io`.
 
