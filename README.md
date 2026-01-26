@@ -28,21 +28,20 @@ a) Install Arduino App Lab on your PC:
    <img src="images/app-lab-downlowad.png" alt="App Lab download page" width="700">
 
 b) Connect the UNO Q to your PC with a USB cable.
-   <img src="images/app-lab-connect.png" alt="Connect to board" width="700">
+   <img src="images/app-lab-connect.png" alt="Connect to board" width="300">
 
 c) Enter your Wi-Fi credentials and set up connectivity.
-   <img src="images/app-lab-2-network.png" alt="Enter network credentials" width="700">
+   <img src="images/app-lab-2-network.png" alt="Enter network credentials" width="300">
 
 d) Update the board when prompted.
-   <img src="images/app-lab-4-install-updates.png" alt="Install updates" width="700">
+   <img src="images/app-lab-4-install-updates.png" alt="Install updates" width="300">
 
 e) Restart the board.
  
 f) In App Lab, open Examples to view all available apps.
-   <img src="images/app-lab-7-examples.png" alt="Examples list" width="700">
 
 g) Open the App Lab terminal (used to access the Uno Q terminal).
-   <img src="images/app-lab-8-openterminal.png" alt="Open terminal" width="700">
+   <img src="images/app-lab-8-openterminal.png" alt="Open terminal" width="400">
 
 ### Create IOTCONNECT Device and Gather Device Credentials
 
