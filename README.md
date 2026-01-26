@@ -1,9 +1,9 @@
-# Automated Lab Flow (Arduino UNO Q -> IOTCONNECT via Relay)
+# Arduino UNO Q App Lab Examples on /IOTCONNECT
 
-This README describes the automated path for the customer lab. The scripts run on the UNO Q host OS. Participants can
-use their Windows laptop for account creation, certificates, and shell access.
+This README describes the automated path for the customer lab. The scripts run on the UNO Q host OS. 
+Participants will use their host machine for account creation, certificates, and shell access.
 
-What is automated on the UNO Q:
+What is automated on the UNO Q:     
 - IOTCONNECT Python Lite SDK install
 - Relay server and client download
 - socat TCP bridge (container -> host relay socket)
@@ -18,7 +18,6 @@ What is still manual:
 - Android tools (ADB) installation on the laptop
 
 ---
-
 
 ## Prerequisites
 
@@ -47,13 +46,13 @@ g) Open the App Lab terminal (used to access the Uno Q terminal).
 
 ### Create IOTCONNECT Device and Gather Device Credentials
 
-a) Create the IOTCONNECT device and template for the lab.
-b) Download the device files:
+a) Create the IOTCONNECT device.
+b) Download the device configuration files to the host machine:
    - `iotcDeviceConfig.json`
    - `device-cert.pem`
    - `device-pkey.pem`
-   Note: the downloaded cert files may include the device name (for example, `cert_unoQ2mcl.crt` and `key_unoQ2mcl.key`).
-   The setup script will try to copy them to `device-cert.pem` and `device-pkey.pem` automatically.
+   Note: the downloaded cert files will include the device name (for example, `cert_unoQ.crt` and `key_unoQ2.key`).
+   The setup script will copy them to `device-cert.pem` and `device-pkey.pem` automatically.
 c) Use the SCP commands below to push the files to the UNO Q.
 
 ---
@@ -108,9 +107,6 @@ This installs the IOTCONNECT Python Lite SDK, installs socat, downloads the rela
 cd /home/arduino/iotc-arduino-uno-q-workshop
 sudo ./scripts/unoq_setup.sh --demo-dir /home/arduino/demo
 ```
-
-If `iotc-socat.service` shows a bad unit file setting, re-run the setup script (it now installs a helper script for the ExecStartPre wait).
-
 Optional flags:
 - `--bridge-port 8899`
 - `--no-systemd` (skip service install/start)
@@ -133,6 +129,15 @@ You should see:
 - Port 8899 listening
 
 ---
+
+## Step 5: Choose and clone a lab example in App Lab
+
+In Arduino App Lab:
+1) Browse examples from `app-bricks-examples`.
+2) Copy the selected app into your workspace.
+3) Note the app folder path (example: `/home/arduino/ArduinoApps/air-quality-on-led-matrix`).
+4) Open the matching guide in `app-configs/<example>/README.md`.
+5) Use the placeholder template in `app-configs/<example>/device-template.json` and fill in telemetry + commands for your lab.
 
 ### Examples Index
 
@@ -162,17 +167,6 @@ Use these IOTCONNECT-specific guides:
 - [video-generic-object-detection](app-configs/video-generic-object-detection/README.md)
 - [video-person-classification](app-configs/video-person-classification/README.md)
 - [weather-forecast](app-configs/weather-forecast/README.md)
-
----
-
-## Step 5: Choose and clone a lab example in App Lab
-
-In Arduino App Lab:
-1) Browse examples from `app-bricks-examples`.
-2) Copy the selected app into your workspace.
-3) Note the app folder path (example: `/home/arduino/ArduinoApps/air-quality-on-led-matrix`).
-4) Open the matching guide in `app-configs/<example>/README.md`.
-5) Use the placeholder template in `app-configs/<example>/device-template.json` and fill in telemetry + commands for your lab.
 
 ---
 
