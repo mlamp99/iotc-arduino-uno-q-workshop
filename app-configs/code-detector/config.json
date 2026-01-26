@@ -1,10 +1,8 @@
 {
     "commands": [
         {
-            "name": "set-interval",
-            "parameters": [
-                "seconds"
-            ]
+            "name": "reset",
+            "parameters": []
         }
     ],
     "example": "code-detector",
@@ -14,9 +12,17 @@
             "type": "STRING"
         },
         {
-            "name": "interval_sec",
-            "type": "INTEGER"
+            "name": "code_content",
+            "type": "STRING"
+        },
+        {
+            "name": "code_type",
+            "type": "STRING"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
         }
     ],
-    "notes": "TODO: define telemetry keys and commands for this app"
+    "notes": "Code detector telemetry"
 }

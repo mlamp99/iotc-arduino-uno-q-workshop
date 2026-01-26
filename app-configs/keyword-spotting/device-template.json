@@ -13,15 +13,7 @@
         "enableCSR": false,
         "certRenewalDay": 0
     },
-    "commands": [
-        {
-            "name": "set-interval",
-            "command": "set-interval",
-            "requiredParam": true,
-            "requiredAck": true,
-            "isOTACommand": false
-        }
-    ],
+    "commands": [],
     "name": "UnoQKeywordSpotting",
     "capability": "0",
     "authType": 2,
@@ -36,11 +28,19 @@
             "aggregateTypes": []
         },
         {
-            "name": "interval_sec",
+            "name": "keyword",
             "displayName": "",
-            "type": "INTEGER",
+            "type": "STRING",
             "description": "",
-            "unit": "s",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "status",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
             "aggregateTypes": []
         }
     ]

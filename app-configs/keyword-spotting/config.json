@@ -1,12 +1,5 @@
 {
-    "commands": [
-        {
-            "name": "set-interval",
-            "parameters": [
-                "seconds"
-            ]
-        }
-    ],
+    "commands": [],
     "example": "keyword-spotting",
     "telemetry": [
         {
@@ -14,9 +7,13 @@
             "type": "STRING"
         },
         {
-            "name": "interval_sec",
-            "type": "INTEGER"
+            "name": "keyword",
+            "type": "STRING"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
         }
     ],
-    "notes": "TODO: define telemetry keys and commands for this app"
+    "notes": "Keyword spotting telemetry"
 }

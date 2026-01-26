@@ -15,9 +15,9 @@
     },
     "commands": [
         {
-            "name": "set-interval",
-            "command": "set-interval",
-            "requiredParam": true,
+            "name": "reset",
+            "command": "reset",
+            "requiredParam": false,
             "requiredAck": true,
             "isOTACommand": false
         }
@@ -36,11 +36,27 @@
             "aggregateTypes": []
         },
         {
-            "name": "interval_sec",
+            "name": "code_content",
             "displayName": "",
-            "type": "INTEGER",
+            "type": "STRING",
             "description": "",
-            "unit": "s",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "code_type",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "status",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
             "aggregateTypes": []
         }
     ]
