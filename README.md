@@ -19,6 +19,45 @@ What is still manual:
 
 ---
 
+
+## Before Step 1: PC + Board Prep
+
+Follow these once on your Windows laptop before starting Step 1.
+
+1) Install Arduino App Lab on your PC:
+   - https://www.arduino.cc/en/software/#app-lab-section
+   ![Arduino App Lab download](images/Arduino-App-Lab.png)
+   ![App Lab download page](images/app-lab-downlowad.png)
+   ![App Lab name screen](images/app-lab-1-name.png)
+
+2) Connect the UNO Q to your PC with a USB cable.
+   ![Connect to board](images/app-lab-connect.png)
+
+3) Enter your Wi-Fi credentials and set up connectivity.
+   ![Enter network credentials](images/app-lab-2-network.png)
+   ![Input password](images/app-lab-5-input-password.png)
+
+4) Update the board when prompted.
+   ![Updates available](images/app-lab-3-updates.png)
+   ![Install updates](images/app-lab-4-install-updates.png)
+
+5) Restart the board.
+   ![Restart services](images/app-lab-iotcscript-restart-services.png)
+
+6) Reconnect to the board.
+
+7) In App Lab, open Examples to view all available apps.
+   ![Examples list](images/app-lab-7-examples.png)
+
+7a) Open the App Lab terminal (useful for running commands on the UNO Q).
+   ![Open terminal](images/app-lab-8-openterminal.png)
+
+8) Open IOTCONNECT at `console.iotconnect.io`.
+
+9) Create a device.
+
+10) Download the device certs and `iotcDeviceConfig.json`, then extract them on your host PC.
+
 ## Prerequisites
 
 On the laptop (manual):
@@ -121,30 +160,30 @@ You should see:
 
 Use these IOTCONNECT-specific guides:
 
-- `air-quality-monitoring` -> `app-configs/air-quality-monitoring/README.md`
-- `anomaly-detection` -> `app-configs/anomaly-detection/README.md`
-- `audio-classification` -> `app-configs/audio-classification/README.md`
-- `bedtime-story-teller` -> `app-configs/bedtime-story-teller/README.md`
-- `blink` -> `app-configs/blink/README.md`
-- `blink-with-ui` -> `app-configs/blink-with-ui/README.md`
-- `cloud-blink` -> `app-configs/cloud-blink/README.md`
-- `code-detector` -> `app-configs/code-detector/README.md`
-- `home-climate-monitoring-and-storage` -> `app-configs/home-climate-monitoring-and-storage/README.md`
-- `image-classification` -> `app-configs/image-classification/README.md`
-- `keyword-spotting` -> `app-configs/keyword-spotting/README.md`
-- `led-matrix-painter` -> `app-configs/led-matrix-painter/README.md`
-- `mascot-jump-game` -> `app-configs/mascot-jump-game/README.md`
-- `object-detection` -> `app-configs/object-detection/README.md`
-- `object-hunting` -> `app-configs/object-hunting/README.md`
-- `real-time-accelerometer` -> `app-configs/real-time-accelerometer/README.md`
-- `system-resources-logger` -> `app-configs/system-resources-logger/README.md`
-- `theremin` -> `app-configs/theremin/README.md`
-- `unoq-pin-toggle` -> `app-configs/unoq-pin-toggle/README.md`
-- `vibration-anomaly-detection` -> `app-configs/vibration-anomaly-detection/README.md`
-- `video-face-detection` -> `app-configs/video-face-detection/README.md`
-- `video-generic-object-detection` -> `app-configs/video-generic-object-detection/README.md`
-- `video-person-classification` -> `app-configs/video-person-classification/README.md`
-- `weather-forecast` -> `app-configs/weather-forecast/README.md`
+- [air-quality-monitoring](app-configs/air-quality-monitoring/README.md)
+- [anomaly-detection](app-configs/anomaly-detection/README.md)
+- [audio-classification](app-configs/audio-classification/README.md)
+- [bedtime-story-teller](app-configs/bedtime-story-teller/README.md)
+- [blink](app-configs/blink/README.md)
+- [blink-with-ui](app-configs/blink-with-ui/README.md)
+- [cloud-blink](app-configs/cloud-blink/README.md)
+- [code-detector](app-configs/code-detector/README.md)
+- [home-climate-monitoring-and-storage](app-configs/home-climate-monitoring-and-storage/README.md)
+- [image-classification](app-configs/image-classification/README.md)
+- [keyword-spotting](app-configs/keyword-spotting/README.md)
+- [led-matrix-painter](app-configs/led-matrix-painter/README.md)
+- [mascot-jump-game](app-configs/mascot-jump-game/README.md)
+- [object-detection](app-configs/object-detection/README.md)
+- [object-hunting](app-configs/object-hunting/README.md)
+- [real-time-accelerometer](app-configs/real-time-accelerometer/README.md)
+- [system-resources-logger](app-configs/system-resources-logger/README.md)
+- [theremin](app-configs/theremin/README.md)
+- [unoq-pin-toggle](app-configs/unoq-pin-toggle/README.md)
+- [vibration-anomaly-detection](app-configs/vibration-anomaly-detection/README.md)
+- [video-face-detection](app-configs/video-face-detection/README.md)
+- [video-generic-object-detection](app-configs/video-generic-object-detection/README.md)
+- [video-person-classification](app-configs/video-person-classification/README.md)
+- [weather-forecast](app-configs/weather-forecast/README.md)
 
 ---
 
