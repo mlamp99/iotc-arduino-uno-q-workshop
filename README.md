@@ -20,59 +20,41 @@ What is still manual:
 ---
 
 
-## Before Step 1: PC + Board Prep
-
-Follow these once on your Windows laptop before starting Step 1.
-
-1) Install Arduino App Lab on your PC:
-   - https://www.arduino.cc/en/software/#app-lab-section
-   <img src="images/Arduino-App-Lab.png" alt="Arduino App Lab download" width="700">
-   <img src="images/app-lab-downlowad.png" alt="App Lab download page" width="700">
-   <img src="images/app-lab-1-name.png" alt="App Lab name screen" width="700">
-
-2) Connect the UNO Q to your PC with a USB cable.
-   <img src="images/app-lab-connect.png" alt="Connect to board" width="700">
-
-3) Enter your Wi-Fi credentials and set up connectivity.
-   <img src="images/app-lab-2-network.png" alt="Enter network credentials" width="700">
-   <img src="images/app-lab-5-input-password.png" alt="Input password" width="700">
-
-4) Update the board when prompted.
-   <img src="images/app-lab-3-updates.png" alt="Updates available" width="700">
-   <img src="images/app-lab-4-install-updates.png" alt="Install updates" width="700">
-
-5) Restart the board.
-   <img src="images/app-lab-iotcscript-restart-services.png" alt="Restart services" width="700">
-
-6) Reconnect to the board.
-
-7) In App Lab, open Examples to view all available apps.
-   <img src="images/app-lab-7-examples.png" alt="Examples list" width="700">
-
-7a) Open the App Lab terminal (useful for running commands on the UNO Q).
-   <img src="images/app-lab-8-openterminal.png" alt="Open terminal" width="700">
-
-8) Open IOTCONNECT at `console.iotconnect.io`.
-
-9) Create a device.
-
-10) Download the device certs and `iotcDeviceConfig.json`, then extract them on your host PC.
-
 ## Prerequisites
 
-On the laptop (manual):
-1) Create the IOTCONNECT device and template for the lab.
-2) Download the device files:
+### Install Arduino App Lab on Host Machine
+
+a) Install Arduino App Lab on your PC:
+   - https://www.arduino.cc/en/software/#app-lab-section
+   <img src="images/app-lab-downlowad.png" alt="App Lab download page" width="700">
+
+b) Connect the UNO Q to your PC with a USB cable.
+   <img src="images/app-lab-connect.png" alt="Connect to board" width="700">
+
+c) Enter your Wi-Fi credentials and set up connectivity.
+   <img src="images/app-lab-2-network.png" alt="Enter network credentials" width="700">
+
+d) Update the board when prompted.
+   <img src="images/app-lab-4-install-updates.png" alt="Install updates" width="700">
+
+e) Restart the board.
+ 
+f) In App Lab, open Examples to view all available apps.
+   <img src="images/app-lab-7-examples.png" alt="Examples list" width="700">
+
+g) Open the App Lab terminal (used to access the Uno Q terminal).
+   <img src="images/app-lab-8-openterminal.png" alt="Open terminal" width="700">
+
+### Create IOTCONNECT Device and Gather Device Credentials
+
+a) Create the IOTCONNECT device and template for the lab.
+b) Download the device files:
    - `iotcDeviceConfig.json`
    - `device-cert.pem`
    - `device-pkey.pem`
    Note: the downloaded cert files may include the device name (for example, `cert_unoQ2mcl.crt` and `key_unoQ2mcl.key`).
    The setup script will try to copy them to `device-cert.pem` and `device-pkey.pem` automatically.
-3) Use the SCP commands below to push the files to the UNO Q.
-
-On the UNO Q (manual once):
-- Arduino App Lab installed
-- Internet access (Ethernet or Wi-Fi)
+c) Use the SCP commands below to push the files to the UNO Q.
 
 ---
 
@@ -89,9 +71,9 @@ chmod +x scripts/*.sh
 
 ---
 
-## Windows Step: Find the UNO Q IP, then SCP certs to the UNO Q (minimal typing)
+## Step 2: Transfer Device Credentials to the UNO Q 
 
-### 1) Get the UNO Q IP address
+### a) Get the UNO Q IP address
 
 On the UNO Q terminal:
 
@@ -101,7 +83,7 @@ hostname -I
 
 If you see more than one IP, use the last one listed (example: `10.50.0.199`). Ignore `172.17.0.1` (that is the App Lab container bridge).
 
-### 2) Copy certs from Windows to the UNO Q
+### b) Copy certs from Windows to the UNO Q
 
 Run these commands on the Windows laptop after you download the IOTCONNECT files.
 
@@ -116,13 +98,9 @@ cd Downloads\*certificates*
 scp * arduino@<UNOQ_IP>:/tmp/
 ```
 
-Then on the UNO Q:
-
-Continue to Step 2 to run the setup script.
-
 ---
 
-## Step 2: Run the automated host setup (if you have not already)
+## Step 3: Run the automated host setup (if you have not already)
 
 This installs the IOTCONNECT Python Lite SDK, installs socat, downloads the relay server + client, and sets up systemd services.
 
@@ -143,7 +121,7 @@ Optional flags:
 
 ---
 
-## Step 3: Verify the host setup
+## Step 4: Verify the host setup
 
 ```bash
 ./scripts/unoq_verify.sh --demo-dir /home/arduino/demo
@@ -156,7 +134,7 @@ You should see:
 
 ---
 
-## Examples Index
+### Examples Index
 
 Use these IOTCONNECT-specific guides:
 
@@ -187,38 +165,7 @@ Use these IOTCONNECT-specific guides:
 
 ---
 
-## App Lab folder name mapping
-
-Use these when running the patch script:
-
-- `air-quality-monitoring` -> `/home/arduino/ArduinoApps/air-quality-on-led-matrix`
-- `anomaly-detection` -> `/home/arduino/ArduinoApps/concrete-crack-detector`
-- `audio-classification` -> `/home/arduino/ArduinoApps/glass-breaking-sensor`
-- `bedtime-story-teller` -> `/home/arduino/ArduinoApps/bedtime-story-teller`
-- `blink` -> `/home/arduino/ArduinoApps/blink-led`
-- `blink-with-ui` -> `/home/arduino/ArduinoApps/blink-led-with-ui`
-- `cloud-blink` -> `/home/arduino/ArduinoApps/<APP_LAB_FOLDER>` (not in the default App Lab list)
-- `code-detector` -> `/home/arduino/ArduinoApps/qr-and-barcode-scanner`
-- `home-climate-monitoring-and-storage` -> `/home/arduino/ArduinoApps/home-climate-monitoring-and-storage`
-- `image-classification` -> `/home/arduino/ArduinoApps/classify-images`
-- `keyword-spotting` -> `/home/arduino/ArduinoApps/hey-arduino`
-- `led-matrix-painter` -> `/home/arduino/ArduinoApps/led-matrix-painter`
-- `mascot-jump-game` -> `/home/arduino/ArduinoApps/mascot-jump-game`
-- `object-detection` -> `/home/arduino/ArduinoApps/detect-objects-on-images`
-- `object-hunting` -> `/home/arduino/ArduinoApps/object-hunting`
-- `real-time-accelerometer` -> `/home/arduino/ArduinoApps/real-time-accelerometer`
-- `system-resources-logger` -> `/home/arduino/ArduinoApps/<APP_LAB_FOLDER>` (not in the default App Lab list)
-- `theremin` -> `/home/arduino/ArduinoApps/theremin-simulator`
-- `unoq-pin-toggle` -> `/home/arduino/ArduinoApps/<APP_LAB_FOLDER>` (not in the default App Lab list)
-- `vibration-anomaly-detection` -> `/home/arduino/ArduinoApps/fan-vibration-monitoring`
-- `video-face-detection` -> `/home/arduino/ArduinoApps/face-detector-on-camera`
-- `video-generic-object-detection` -> `/home/arduino/ArduinoApps/detect-objects-on-camera`
-- `video-person-classification` -> `/home/arduino/ArduinoApps/person-classifier-on-camera`
-- `weather-forecast` -> `/home/arduino/ArduinoApps/weather-forecast-on-led-matrix`
-
----
-
-## Step 4: Choose and clone a lab example in App Lab
+## Step 5: Choose and clone a lab example in App Lab
 
 In Arduino App Lab:
 1) Browse examples from `app-bricks-examples`.
@@ -229,7 +176,7 @@ In Arduino App Lab:
 
 ---
 
-## Step 5: Patch the App Lab project for IOTCONNECT
+## Step 6: Patch the App Lab project for IOTCONNECT
 
 This copies the patched relay client into the app. If a pre-patched `main.py` exists in
 `app-configs/<example>/python/main.py`, it will overwrite your app’s `python/main.py`.
@@ -253,7 +200,7 @@ IOTC_SEND({"temp_c": temp_c, "humidity": humidity})
 
 ---
 
-## Step 6: Run the app and confirm telemetry
+## Step 7: Run the app and confirm telemetry
 
 1) Run the app in App Lab.
 2) Confirm telemetry appears in IOTCONNECT.
