@@ -13,15 +13,7 @@
         "enableCSR": false,
         "certRenewalDay": 0
     },
-    "commands": [
-        {
-            "name": "set-interval",
-            "command": "set-interval",
-            "requiredParam": true,
-            "requiredAck": true,
-            "isOTACommand": false
-        }
-    ],
+    "commands": [],
     "name": "UnoQBedtimeStoryTeller",
     "capability": "0",
     "authType": 2,
@@ -36,11 +28,67 @@
             "aggregateTypes": []
         },
         {
-            "name": "interval_sec",
+            "name": "age",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "theme",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "tone",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "ending_type",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "narrative_structure",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "duration",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "character_count",
             "displayName": "",
             "type": "INTEGER",
             "description": "",
-            "unit": "s",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "status",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
             "aggregateTypes": []
         }
     ]

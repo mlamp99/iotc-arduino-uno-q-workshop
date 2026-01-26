@@ -15,8 +15,8 @@
     },
     "commands": [
         {
-            "name": "set-interval",
-            "command": "set-interval",
+            "name": "set-led",
+            "command": "set-led",
             "requiredParam": true,
             "requiredAck": true,
             "isOTACommand": false
@@ -36,11 +36,19 @@
             "aggregateTypes": []
         },
         {
-            "name": "interval_sec",
+            "name": "led_state",
             "displayName": "",
-            "type": "INTEGER",
+            "type": "STRING",
             "description": "",
-            "unit": "s",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "status",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
             "aggregateTypes": []
         }
     ]

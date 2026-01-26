@@ -1,12 +1,5 @@
 {
-    "commands": [
-        {
-            "name": "set-interval",
-            "parameters": [
-                "seconds"
-            ]
-        }
-    ],
+    "commands": [],
     "example": "bedtime-story-teller",
     "telemetry": [
         {
@@ -14,9 +7,37 @@
             "type": "STRING"
         },
         {
-            "name": "interval_sec",
+            "name": "age",
+            "type": "STRING"
+        },
+        {
+            "name": "theme",
+            "type": "STRING"
+        },
+        {
+            "name": "tone",
+            "type": "STRING"
+        },
+        {
+            "name": "ending_type",
+            "type": "STRING"
+        },
+        {
+            "name": "narrative_structure",
+            "type": "STRING"
+        },
+        {
+            "name": "duration",
+            "type": "STRING"
+        },
+        {
+            "name": "character_count",
             "type": "INTEGER"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
         }
     ],
-    "notes": "TODO: define telemetry keys and commands for this app"
+    "notes": "Bedtime story telemetry"
 }
