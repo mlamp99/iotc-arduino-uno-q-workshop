@@ -1,64 +1,52 @@
-# Hey Arduino!
+# IOTCONNECT Version: keyword-spotting
 
-The **Hey Arduino!** example triggers a LED matrix animation whenever the keyword "Hey Arduino" is detected through a microphone.
+This is the IOTCONNECT-enabled version of the Arduino example.
 
-To use this example, we need to use **Network Mode**, as it requires a [USB-C® hub](https://store.arduino.cc/products/usb-c-to-hdmi-multiport-adapter-with-ethernet-and-usb-hub) (to connect the microphone).
+Original Arduino README:
+- https://github.com/arduino/app-bricks-examples/blob/main/examples/keyword-spotting/README.md
 
-Network mode is selected when launching the Arduino App Lab. You can read more about this the [Network Mode section](/learn/first-setup#option-2-remote-connect-ssh).
+## Overview
+This version adds an IOTCONNECT relay client, a device template, and optional command handling so the app can publish telemetry and receive commands from IOTCONNECT.
 
-## Bricks Used
+## What this adds
+- IOTCONNECT relay client wiring
+- Device template for telemetry + commands
+- Optional commands (if defined below)
+- Optional debug logs for telemetry send
 
-- `keyword_spotting` - this Brick is designed to detect sound patterns, triggering event in case of a match.
+## Files
+- `python/main.py` (IOTCONNECT-enabled app code)
+- `device-template.json` (IOTCONNECT device template)
+- `config.json` (telemetry/command definitions)
 
-## Hardware and Software Requirements
+## Device Template
+- Template code: `UnoQKS`
+- Template name: `UnoQKeywordSpotting`
 
-### Hardware
+## Telemetry Fields
+| Field | Type |
+| --- | --- |
+| `UnoQdemo` | `STRING` |
+| `keyword` | `STRING` |
+| `status` | `STRING` |
 
-- Arduino® UNO Q
-- [USB-C® hub](https://store.arduino.cc/products/usb-c-to-hdmi-multiport-adapter-with-ethernet-and-usb-hub)
-- USB microphone (or headset)
-- A power supply (5 V, 3 A) for the USB hub (e.g. a phone charger)
+## Commands
+(none)
 
-### Software
+## How to use in App Lab
+1) Copy the example into your App Lab workspace.
+2) Run the patcher from the workshop repo:
+   ```bash
+   ./scripts/unoq_patch_app.sh /home/arduino/ArduinoApps/keyword-spotting
+   ```
+3) Run the app and verify telemetry in IOTCONNECT.
 
-- Arduino App Lab
+## IOTCONNECT setup checklist
+- Create or select the device template using the fields above.
+- Create a device bound to that template.
+- Download `iotcDeviceConfig.json`, `device-cert.pem`, and `device-pkey.pem`.
+- Copy those files to `/home/arduino/demo` on the UNO Q.
 
-## How to Use the Example
-
-### Hardware Setup
-
-1. Connect an USB-C® hub to the board
-2. Connect a USB microphone or headset to the USB-C® hub.
-3. Power the USB-C hub from a 5V power source (e.g. phone charger).
-
-![Setting up the USB-C® hub](assets/docs_assets/hardware-setup.png)
-
-### Launch the App
-
-1. Make sure we are connected to the board using the **Network mode** (selected when launching Arduino App Lab).
-2. Launch the App by clicking on the "Play" button in the top right corner. Wait until the App has launched.
-    ![Launching an App](assets/docs_assets/launch-app.png)
-
-3. Say the words "Hey Arduino" into the microphone.
-4. An animation on the LED matrix should trigger (heart animation).
-
-### How it Works
-
-This example uses the `keyword_spotting` Brick, which is designed to detect specified keywords. A pre-trained model is used particularly for identifying **"Hey Arduino"**.
-
-The Brick monitors the audio continuously, and when it detects the keyword, it calls the microcontroller to activate an animation on the LED matrix, using the Bridge tool.
-
-![How Hey Arduino! works](assets/docs_assets/keyword-spotting.png)
-
-### Understanding the Code
-
-On the Linux (Python) side:
-
-- `spotter = KeywordSpotting()` - initializes an audio listener that monitors microphone input
-- `spotter.on_detect("hey_arduino", on_keyword_detected)` - if "Hey Arduino" is detected, call the `on_keyword_detected()` function
-- `Bridge.call("keyword_detected")` - inside the callback function, we use the Bridge tool to tell the microcontroller that the keyword has been spotted!
-
-On the microcontroller (sketch) side:
-
-- `Bridge.provide("keyword_detected", wake_up);` - we receive a call to "wake up" from the Python side.
-- `playAnimation(HeartAnim, 8, 1, 50);` - plays an animation when the keyword is identified.
+## Notes
+- If the example sends telemetry only on user action, you will not see data until that action occurs.
+- If you change the device template in IOTCONNECT, re-create the device or update it to match these fields.

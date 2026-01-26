@@ -117,6 +117,37 @@ You should see:
 
 ---
 
+## Examples Index
+
+Use these IOTCONNECT-specific guides:
+
+- `air-quality-monitoring` -> `app-configs/air-quality-monitoring/README.md`
+- `anomaly-detection` -> `app-configs/anomaly-detection/README.md`
+- `audio-classification` -> `app-configs/audio-classification/README.md`
+- `bedtime-story-teller` -> `app-configs/bedtime-story-teller/README.md`
+- `blink` -> `app-configs/blink/README.md`
+- `blink-with-ui` -> `app-configs/blink-with-ui/README.md`
+- `cloud-blink` -> `app-configs/cloud-blink/README.md`
+- `code-detector` -> `app-configs/code-detector/README.md`
+- `home-climate-monitoring-and-storage` -> `app-configs/home-climate-monitoring-and-storage/README.md`
+- `image-classification` -> `app-configs/image-classification/README.md`
+- `keyword-spotting` -> `app-configs/keyword-spotting/README.md`
+- `led-matrix-painter` -> `app-configs/led-matrix-painter/README.md`
+- `mascot-jump-game` -> `app-configs/mascot-jump-game/README.md`
+- `object-detection` -> `app-configs/object-detection/README.md`
+- `object-hunting` -> `app-configs/object-hunting/README.md`
+- `real-time-accelerometer` -> `app-configs/real-time-accelerometer/README.md`
+- `system-resources-logger` -> `app-configs/system-resources-logger/README.md`
+- `theremin` -> `app-configs/theremin/README.md`
+- `unoq-pin-toggle` -> `app-configs/unoq-pin-toggle/README.md`
+- `vibration-anomaly-detection` -> `app-configs/vibration-anomaly-detection/README.md`
+- `video-face-detection` -> `app-configs/video-face-detection/README.md`
+- `video-generic-object-detection` -> `app-configs/video-generic-object-detection/README.md`
+- `video-person-classification` -> `app-configs/video-person-classification/README.md`
+- `weather-forecast` -> `app-configs/weather-forecast/README.md`
+
+---
+
 ## Step 4: Choose and clone a lab example in App Lab
 
 In Arduino App Lab:
