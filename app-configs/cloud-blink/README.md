@@ -3,7 +3,8 @@
 This is the IOTCONNECT-enabled version of the Arduino example.
 
 Original Arduino README:
-- https://github.com/arduino/app-bricks-examples/blob/main/examples/cloud-blink/README.md
+- https://github.com/arduino/app-bricks-examples
+(If your example name differs, open the corresponding README in the Arduino repo.)
 
 ## Overview
 This version adds an IOTCONNECT relay client, a device template, and optional command handling so the app can publish telemetry and receive commands from IOTCONNECT.
@@ -13,6 +14,10 @@ This version adds an IOTCONNECT relay client, a device template, and optional co
 - Device template for telemetry + commands
 - Optional commands (if defined below)
 - Optional debug logs for telemetry send
+
+App Lab folder: `/home/arduino/ArduinoApps/blink-led`
+
+App Lab folder: `/home/arduino/ArduinoApps/<APP_LAB_FOLDER>`
 
 ## Files
 - `python/main.py` (IOTCONNECT-enabled app code)
@@ -36,11 +41,14 @@ This version adds an IOTCONNECT relay client, a device template, and optional co
 | --- | --- |
 | `set-led` | `state` |
 
+## Notes on App Lab folder names
+- If your App Lab folder name differs, pass it as the first argument and the example name as the second.
+
 ## How to use in App Lab
 1) Copy the example into your App Lab workspace.
 2) Run the patcher from the workshop repo:
    ```bash
-   ./scripts/unoq_patch_app.sh /home/arduino/ArduinoApps/cloud-blink
+   ./scripts/unoq_patch_app.sh /home/arduino/ArduinoApps/<APP_LAB_FOLDER> cloud-blink
    ```
 3) Run the app and verify telemetry in IOTCONNECT.
 

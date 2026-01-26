@@ -148,12 +148,43 @@ Use these IOTCONNECT-specific guides:
 
 ---
 
+## App Lab folder name mapping
+
+Use these when running the patch script:
+
+- `air-quality-monitoring` -> `/home/arduino/ArduinoApps/air-quality-on-led-matrix`
+- `anomaly-detection` -> `/home/arduino/ArduinoApps/concrete-crack-detector`
+- `audio-classification` -> `/home/arduino/ArduinoApps/glass-breaking-sensor`
+- `bedtime-story-teller` -> `/home/arduino/ArduinoApps/bedtime-story-teller`
+- `blink` -> `/home/arduino/ArduinoApps/blink-led`
+- `blink-with-ui` -> `/home/arduino/ArduinoApps/blink-led-with-ui`
+- `cloud-blink` -> `/home/arduino/ArduinoApps/<APP_LAB_FOLDER>` (not in the default App Lab list)
+- `code-detector` -> `/home/arduino/ArduinoApps/qr-and-barcode-scanner`
+- `home-climate-monitoring-and-storage` -> `/home/arduino/ArduinoApps/home-climate-monitoring-and-storage`
+- `image-classification` -> `/home/arduino/ArduinoApps/classify-images`
+- `keyword-spotting` -> `/home/arduino/ArduinoApps/hey-arduino`
+- `led-matrix-painter` -> `/home/arduino/ArduinoApps/led-matrix-painter`
+- `mascot-jump-game` -> `/home/arduino/ArduinoApps/mascot-jump-game`
+- `object-detection` -> `/home/arduino/ArduinoApps/detect-objects-on-images`
+- `object-hunting` -> `/home/arduino/ArduinoApps/object-hunting`
+- `real-time-accelerometer` -> `/home/arduino/ArduinoApps/real-time-accelerometer`
+- `system-resources-logger` -> `/home/arduino/ArduinoApps/<APP_LAB_FOLDER>` (not in the default App Lab list)
+- `theremin` -> `/home/arduino/ArduinoApps/theremin-simulator`
+- `unoq-pin-toggle` -> `/home/arduino/ArduinoApps/<APP_LAB_FOLDER>` (not in the default App Lab list)
+- `vibration-anomaly-detection` -> `/home/arduino/ArduinoApps/fan-vibration-monitoring`
+- `video-face-detection` -> `/home/arduino/ArduinoApps/face-detector-on-camera`
+- `video-generic-object-detection` -> `/home/arduino/ArduinoApps/detect-objects-on-camera`
+- `video-person-classification` -> `/home/arduino/ArduinoApps/person-classifier-on-camera`
+- `weather-forecast` -> `/home/arduino/ArduinoApps/weather-forecast-on-led-matrix`
+
+---
+
 ## Step 4: Choose and clone a lab example in App Lab
 
 In Arduino App Lab:
 1) Browse examples from `app-bricks-examples`.
 2) Copy the selected app into your workspace.
-3) Note the app folder path (example: `/home/arduino/ArduinoApps/air-quality-monitoring`).
+3) Note the app folder path (example: `/home/arduino/ArduinoApps/air-quality-on-led-matrix`).
 4) Open the matching guide in `app-configs/<example>/README.md`.
 5) Use the placeholder template in `app-configs/<example>/device-template.json` and fill in telemetry + commands for your lab.
 
@@ -165,7 +196,7 @@ This copies the patched relay client into the app. If a pre-patched `main.py` ex
 `app-configs/<example>/python/main.py`, it will overwrite your app’s `python/main.py`.
 
 ```bash
-./scripts/unoq_patch_app.sh /home/arduino/ArduinoApps/air-quality-monitoring
+./scripts/unoq_patch_app.sh /home/arduino/ArduinoApps/air-quality-on-led-matrix air-quality-monitoring
 ```
 
 If your App Lab folder name differs from the example name, pass it explicitly:

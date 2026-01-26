@@ -14,6 +14,8 @@ This version adds an IOTCONNECT relay client, a device template, and optional co
 - Optional commands (if defined below)
 - Optional debug logs for telemetry send
 
+App Lab folder: `/home/arduino/ArduinoApps/mascot-jump-game`
+
 ## Files
 - `python/main.py` (IOTCONNECT-enabled app code)
 - `device-template.json` (IOTCONNECT device template)
@@ -44,7 +46,7 @@ This version adds an IOTCONNECT relay client, a device template, and optional co
 1) Copy the example into your App Lab workspace.
 2) Run the patcher from the workshop repo:
    ```bash
-   ./scripts/unoq_patch_app.sh /home/arduino/ArduinoApps/mascot-jump-game
+   ./scripts/unoq_patch_app.sh /home/arduino/ArduinoApps/mascot-jump-game mascot-jump-game
    ```
 3) Run the app and verify telemetry in IOTCONNECT.
 

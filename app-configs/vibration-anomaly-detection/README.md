@@ -3,7 +3,7 @@
 This is the IOTCONNECT-enabled version of the Arduino example.
 
 Original Arduino README:
-- https://github.com/arduino/app-bricks-examples/blob/main/examples/vibration-anomaly-detection/README.md
+- https://github.com/arduino/app-bricks-examples/blob/main/examples/fan-vibration-monitoring/README.md
 
 ## Overview
 This version adds an IOTCONNECT relay client, a device template, and optional command handling so the app can publish telemetry and receive commands from IOTCONNECT.
@@ -13,6 +13,8 @@ This version adds an IOTCONNECT relay client, a device template, and optional co
 - Device template for telemetry + commands
 - Optional commands (if defined below)
 - Optional debug logs for telemetry send
+
+App Lab folder: `/home/arduino/ArduinoApps/fan-vibration-monitoring`
 
 ## Files
 - `python/main.py` (IOTCONNECT-enabled app code)
@@ -44,7 +46,7 @@ This version adds an IOTCONNECT relay client, a device template, and optional co
 1) Copy the example into your App Lab workspace.
 2) Run the patcher from the workshop repo:
    ```bash
-   ./scripts/unoq_patch_app.sh /home/arduino/ArduinoApps/vibration-anomaly-detection
+   ./scripts/unoq_patch_app.sh /home/arduino/ArduinoApps/fan-vibration-monitoring vibration-anomaly-detection
    ```
 3) Run the app and verify telemetry in IOTCONNECT.
 
