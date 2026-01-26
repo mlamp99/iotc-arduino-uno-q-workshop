@@ -1,9 +1,27 @@
 {
     "commands": [
         {
-            "name": "set-interval",
+            "name": "set-freq",
             "parameters": [
-                "seconds"
+                "freq"
+            ]
+        },
+        {
+            "name": "set-amp",
+            "parameters": [
+                "amp"
+            ]
+        },
+        {
+            "name": "set-volume",
+            "parameters": [
+                "volume"
+            ]
+        },
+        {
+            "name": "power",
+            "parameters": [
+                "on"
             ]
         }
     ],
@@ -14,9 +32,21 @@
             "type": "STRING"
         },
         {
-            "name": "interval_sec",
+            "name": "frequency",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "amplitude",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "volume",
             "type": "INTEGER"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
         }
     ],
-    "notes": "TODO: define telemetry keys and commands for this app"
+    "notes": "Theremin telemetry"
 }

@@ -1,9 +1,9 @@
 {
     "commands": [
         {
-            "name": "set-interval",
+            "name": "set-threshold",
             "parameters": [
-                "seconds"
+                "threshold"
             ]
         }
     ],
@@ -14,9 +14,33 @@
             "type": "STRING"
         },
         {
-            "name": "interval_sec",
-            "type": "INTEGER"
+            "name": "anomaly_score",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "anomaly_detected",
+            "type": "STRING"
+        },
+        {
+            "name": "threshold",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "x",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "y",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "z",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
         }
     ],
-    "notes": "TODO: define telemetry keys and commands for this app"
+    "notes": "Vibration anomaly telemetry"
 }

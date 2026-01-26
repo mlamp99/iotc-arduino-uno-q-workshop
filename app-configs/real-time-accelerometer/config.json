@@ -16,7 +16,39 @@
         {
             "name": "interval_sec",
             "type": "INTEGER"
+        },
+        {
+            "name": "idle",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "snake",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "updown",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "wave",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "x",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "y",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "z",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
         }
     ],
-    "notes": "TODO: define telemetry keys and commands for this app"
+    "notes": "Real-time accelerometer telemetry"
 }

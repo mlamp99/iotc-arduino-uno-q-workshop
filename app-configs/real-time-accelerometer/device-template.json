@@ -42,6 +42,70 @@
             "description": "",
             "unit": "s",
             "aggregateTypes": []
+        },
+        {
+            "name": "idle",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "snake",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "updown",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "wave",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "x",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "g",
+            "aggregateTypes": []
+        },
+        {
+            "name": "y",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "g",
+            "aggregateTypes": []
+        },
+        {
+            "name": "z",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "g",
+            "aggregateTypes": []
+        },
+        {
+            "name": "status",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
         }
     ]
 }

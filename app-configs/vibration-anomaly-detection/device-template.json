@@ -15,8 +15,8 @@
     },
     "commands": [
         {
-            "name": "set-interval",
-            "command": "set-interval",
+            "name": "set-threshold",
+            "command": "set-threshold",
             "requiredParam": true,
             "requiredAck": true,
             "isOTACommand": false
@@ -36,11 +36,59 @@
             "aggregateTypes": []
         },
         {
-            "name": "interval_sec",
+            "name": "anomaly_score",
             "displayName": "",
-            "type": "INTEGER",
+            "type": "DECIMAL",
             "description": "",
-            "unit": "s",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "anomaly_detected",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "threshold",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "x",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "m/s2",
+            "aggregateTypes": []
+        },
+        {
+            "name": "y",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "m/s2",
+            "aggregateTypes": []
+        },
+        {
+            "name": "z",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "m/s2",
+            "aggregateTypes": []
+        },
+        {
+            "name": "status",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
             "aggregateTypes": []
         }
     ]

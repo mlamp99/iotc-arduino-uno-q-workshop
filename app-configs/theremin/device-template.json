@@ -15,8 +15,29 @@
     },
     "commands": [
         {
-            "name": "set-interval",
-            "command": "set-interval",
+            "name": "set-freq",
+            "command": "set-freq",
+            "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
+        },
+        {
+            "name": "set-amp",
+            "command": "set-amp",
+            "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
+        },
+        {
+            "name": "set-volume",
+            "command": "set-volume",
+            "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
+        },
+        {
+            "name": "power",
+            "command": "power",
             "requiredParam": true,
             "requiredAck": true,
             "isOTACommand": false
@@ -36,11 +57,35 @@
             "aggregateTypes": []
         },
         {
-            "name": "interval_sec",
+            "name": "frequency",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "Hz",
+            "aggregateTypes": []
+        },
+        {
+            "name": "amplitude",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "volume",
             "displayName": "",
             "type": "INTEGER",
             "description": "",
-            "unit": "s",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "status",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
             "aggregateTypes": []
         }
     ]
