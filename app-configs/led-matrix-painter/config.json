@@ -1,12 +1,5 @@
 {
-    "commands": [
-        {
-            "name": "set-interval",
-            "parameters": [
-                "seconds"
-            ]
-        }
-    ],
+    "commands": [],
     "example": "led-matrix-painter",
     "telemetry": [
         {
@@ -14,9 +7,25 @@
             "type": "STRING"
         },
         {
-            "name": "interval_sec",
+            "name": "action",
+            "type": "STRING"
+        },
+        {
+            "name": "frame_id",
             "type": "INTEGER"
+        },
+        {
+            "name": "frame_name",
+            "type": "STRING"
+        },
+        {
+            "name": "frame_count",
+            "type": "INTEGER"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
         }
     ],
-    "notes": "TODO: define telemetry keys and commands for this app"
+    "notes": "LED matrix painter telemetry"
 }

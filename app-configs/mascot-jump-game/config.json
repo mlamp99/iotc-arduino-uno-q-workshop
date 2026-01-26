@@ -5,6 +5,10 @@
             "parameters": [
                 "seconds"
             ]
+        },
+        {
+            "name": "restart",
+            "parameters": []
         }
     ],
     "example": "mascot-jump-game",
@@ -16,7 +20,27 @@
         {
             "name": "interval_sec",
             "type": "INTEGER"
+        },
+        {
+            "name": "score",
+            "type": "INTEGER"
+        },
+        {
+            "name": "high_score",
+            "type": "INTEGER"
+        },
+        {
+            "name": "game_over",
+            "type": "STRING"
+        },
+        {
+            "name": "speed",
+            "type": "DECIMAL"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
         }
     ],
-    "notes": "TODO: define telemetry keys and commands for this app"
+    "notes": "Mascot jump game telemetry"
 }

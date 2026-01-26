@@ -13,15 +13,7 @@
         "enableCSR": false,
         "certRenewalDay": 0
     },
-    "commands": [
-        {
-            "name": "set-interval",
-            "command": "set-interval",
-            "requiredParam": true,
-            "requiredAck": true,
-            "isOTACommand": false
-        }
-    ],
+    "commands": [],
     "name": "UnoQLedMatrixPainter",
     "capability": "0",
     "authType": 2,
@@ -36,11 +28,43 @@
             "aggregateTypes": []
         },
         {
-            "name": "interval_sec",
+            "name": "action",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "frame_id",
             "displayName": "",
             "type": "INTEGER",
             "description": "",
-            "unit": "s",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "frame_name",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "frame_count",
+            "displayName": "",
+            "type": "INTEGER",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "status",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
             "aggregateTypes": []
         }
     ]
