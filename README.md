@@ -141,7 +141,7 @@ In Arduino App Lab:
 2) Copy the selected app into your workspace.
 3) Note the app folder path (example: `/home/arduino/ArduinoApps/air-quality-on-led-matrix`).
 4) Open the matching guide in `app-configs/<example>/README.md`.
-5) Use the placeholder template in `app-configs/<example>/device-template.json` and fill in telemetry + commands for your lab.
+5) Use the placeholder template in `app-configs/<example>/device-template.json` and fill in telemetry + commands for your lab. If you want a single all-in-one template, start from `app-configs/superset/device-template.json` and delete the fields you do not need.
 
 ### Examples Index
 
