@@ -12,6 +12,7 @@ import time
 import json
 import requests
 import shlex
+import traceback
 
 # ---- IOTCONNECT Relay (App Lab TCP bridge) ----
 from iotc_relay_client import IoTConnectRelayClient
@@ -58,9 +59,11 @@ def on_relay_command(command_name, parameters):
                         payload["image_type"] = tokens[1]
                     if len(tokens) >= 3:
                         payload["confidence"] = tokens[2]
+            print(f"IOTCONNECT classify-image payload: {repr(payload)}")
             on_classify_image("iotc", payload)
         except Exception as e:
             print(f"IOTCONNECT classify-image failed: {e}")
+            print(traceback.format_exc())
 
 
 relay = IoTConnectRelayClient(
@@ -191,6 +194,8 @@ def on_classify_image(client_id, data):
         })
 
     except Exception as e:
+        print(f"on_classify_image error: {e}")
+        print(traceback.format_exc())
         ui.send_message('classification_error', {'error': str(e)})
         send_telemetry({
             "status": "error",
