@@ -11,6 +11,8 @@ import base64
 import time
 import json
 import requests
+import shlex
+import traceback
 
 # ---- IOTCONNECT Relay (App Lab TCP bridge) ----
 from iotc_relay_client import IoTConnectRelayClient
@@ -26,7 +28,8 @@ object_detection = ObjectDetection()
 
 def on_relay_command(command_name, parameters):
     global CURRENT_CONFIDENCE
-    print(f"IOTCONNECT command: {command_name} {parameters}")
+    param_type = type(parameters).__name__
+    print(f"IOTCONNECT command: {command_name} ({param_type}) {repr(parameters)}")
     if command_name == "set-confidence":
         try:
             if isinstance(parameters, dict):
@@ -37,6 +40,33 @@ def on_relay_command(command_name, parameters):
             print(f"IOTCONNECT confidence set to {CURRENT_CONFIDENCE}")
         except Exception as e:
             print(f"IOTCONNECT confidence update failed: {e}")
+    elif command_name == "detect-objects":
+        try:
+            payload = parameters if parameters is not None else {}
+            if isinstance(payload, str):
+                raw = payload.strip()
+                if raw.startswith("{") and raw.endswith("}"):
+                    try:
+                        payload = json.loads(raw)
+                    except Exception:
+                        payload = {}
+                else:
+                    tokens = shlex.split(raw)
+                    payload = {}
+                    if len(tokens) >= 1:
+                        payload["image_url"] = tokens[0]
+                    if len(tokens) >= 2:
+                        payload["image_type"] = tokens[1]
+                    if len(tokens) >= 3:
+                        try:
+                            payload["confidence"] = float(tokens[2])
+                        except Exception:
+                            payload["confidence"] = tokens[2]
+            print(f"IOTCONNECT detect-objects payload: {repr(payload)}")
+            on_detect_objects("iotc", payload)
+        except Exception as e:
+            print(f"IOTCONNECT detect-objects failed: {e}")
+            print(traceback.format_exc())
 
 
 relay = IoTConnectRelayClient(
@@ -222,6 +252,8 @@ def on_detect_objects(client_id, data):
         })
 
     except Exception as e:
+        print(f"on_detect_objects error: {e}")
+        print(traceback.format_exc())
         ui.send_message('detection_error', {'error': str(e)})
         send_telemetry({
             "status": "error",

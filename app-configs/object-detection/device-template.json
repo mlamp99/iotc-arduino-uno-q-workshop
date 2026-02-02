@@ -20,6 +20,13 @@
             "requiredParam": true,
             "requiredAck": true,
             "isOTACommand": false
+        },
+        {
+            "name": "detect-objects",
+            "command": "detect-objects",
+            "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
         }
     ],
     "name": "UnoQObjectDetection",

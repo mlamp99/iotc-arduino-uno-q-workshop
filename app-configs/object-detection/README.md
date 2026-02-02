@@ -51,6 +51,16 @@ App Lab folder: `/home/arduino/ArduinoApps/detect-objects-on-images`
 | Command | Parameters |
 | --- | --- |
 | `set-confidence` | `confidence` |
+| `detect-objects` | `image_url`, `image`, `image_type`, `confidence` |
+
+## Example IOTCONNECT command payload
+```json
+{
+  "image_url": "https://example.com/sample.jpg",
+  "image_type": "jpeg",
+  "confidence": 0.25
+}
+```
 
 ## How to use in App Lab
 1) Copy the example into your App Lab workspace.

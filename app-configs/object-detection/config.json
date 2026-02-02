@@ -5,6 +5,15 @@
             "parameters": [
                 "confidence"
             ]
+        },
+        {
+            "name": "detect-objects",
+            "parameters": [
+                "image_url",
+                "image",
+                "image_type",
+                "confidence"
+            ]
         }
     ],
     "example": "object-detection",
