@@ -58,7 +58,10 @@ def on_relay_command(command_name, parameters):
                     if len(tokens) >= 2:
                         payload["image_type"] = tokens[1]
                     if len(tokens) >= 3:
-                        payload["confidence"] = tokens[2]
+                        try:
+                            payload["confidence"] = float(tokens[2])
+                        except Exception:
+                            payload["confidence"] = tokens[2]
             print(f"IOTCONNECT classify-image payload: {repr(payload)}")
             on_classify_image("iotc", payload)
         except Exception as e:
