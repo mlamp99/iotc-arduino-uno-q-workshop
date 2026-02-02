@@ -11,6 +11,7 @@ import base64
 import time
 import json
 import requests
+import shlex
 
 # ---- IOTCONNECT Relay (App Lab TCP bridge) ----
 from iotc_relay_client import IoTConnectRelayClient
@@ -41,6 +42,22 @@ def on_relay_command(command_name, parameters):
     elif command_name == "classify-image":
         try:
             payload = parameters if parameters is not None else {}
+            if isinstance(payload, str):
+                raw = payload.strip()
+                if raw.startswith("{") and raw.endswith("}"):
+                    try:
+                        payload = json.loads(raw)
+                    except Exception:
+                        payload = {}
+                else:
+                    tokens = shlex.split(raw)
+                    payload = {}
+                    if len(tokens) >= 1:
+                        payload["image_url"] = tokens[0]
+                    if len(tokens) >= 2:
+                        payload["image_type"] = tokens[1]
+                    if len(tokens) >= 3:
+                        payload["confidence"] = tokens[2]
             on_classify_image("iotc", payload)
         except Exception as e:
             print(f"IOTCONNECT classify-image failed: {e}")
