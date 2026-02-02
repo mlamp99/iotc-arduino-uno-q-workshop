@@ -26,7 +26,8 @@ image_classification = ImageClassification()
 
 def on_relay_command(command_name, parameters):
     global CURRENT_CONFIDENCE
-    print(f"IOTCONNECT command: {command_name} {parameters}")
+    param_type = type(parameters).__name__
+    print(f"IOTCONNECT command: {command_name} ({param_type}) {repr(parameters)}")
     if command_name == "set-confidence":
         try:
             if isinstance(parameters, dict):
@@ -37,6 +38,12 @@ def on_relay_command(command_name, parameters):
             print(f"IOTCONNECT confidence set to {CURRENT_CONFIDENCE}")
         except Exception as e:
             print(f"IOTCONNECT confidence update failed: {e}")
+    elif command_name == "classify-image":
+        try:
+            payload = parameters if parameters is not None else {}
+            on_classify_image("iotc", payload)
+        except Exception as e:
+            print(f"IOTCONNECT classify-image failed: {e}")
 
 
 relay = IoTConnectRelayClient(

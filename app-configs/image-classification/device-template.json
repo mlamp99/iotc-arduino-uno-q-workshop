@@ -20,6 +20,13 @@
             "requiredParam": true,
             "requiredAck": true,
             "isOTACommand": false
+        },
+        {
+            "name": "classify-image",
+            "command": "classify-image",
+            "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
         }
     ],
     "name": "UnoQImageClassification",
