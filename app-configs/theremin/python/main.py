@@ -28,6 +28,10 @@ wave_gen = WaveGenerator(
 
 wave_gen.set_frequency(440.0)
 wave_gen.set_amplitude(0.0)
+_state = wave_gen.get_state()
+LAST_FREQ = float(_state.get("frequency", 440.0))
+LAST_AMP = float(_state.get("amplitude", 0.0))
+LAST_VOLUME = int(_state.get("volume", 100))
 
 ui = WebUI()
 
@@ -62,6 +66,7 @@ def _freq_from_x(x):
 
 
 def on_move(sid, data=None):
+    global LAST_FREQ, LAST_AMP
     d = data or {}
     x = float(d.get("x", 0.0))
     y = float(d.get("y", 1.0))
@@ -71,24 +76,31 @@ def on_move(sid, data=None):
 
     wave_gen.set_frequency(freq)
     wave_gen.set_amplitude(amp)
+    LAST_FREQ = float(freq)
+    LAST_AMP = float(amp)
 
     ui.send_message("theremin:state", {"freq": freq, "amp": amp}, room=sid)
     send_telemetry(freq, amp, wave_gen.get_state()["volume"], "move")
 
 
 def on_power(sid, data=None):
+    global LAST_AMP
     d = data or {}
     on = bool(d.get("on", False))
     if not on:
         wave_gen.set_amplitude(0.0)
+    else:
+        wave_gen.set_amplitude(LAST_AMP)
     send_telemetry(wave_gen.get_state()["frequency"], wave_gen.get_state()["amplitude"], wave_gen.get_state()["volume"], "power")
 
 
 def on_set_volume(sid, data=None):
+    global LAST_VOLUME
     d = data or {}
     volume = int(d.get("volume", 100))
     volume = max(0, min(100, volume))
     wave_gen.set_volume(volume)
+    LAST_VOLUME = int(volume)
     ui.send_message("theremin:volume", {"volume": volume})
     send_telemetry(wave_gen.get_state()["frequency"], wave_gen.get_state()["amplitude"], wave_gen.get_state()["volume"], "volume")
 
@@ -96,11 +108,14 @@ def on_set_volume(sid, data=None):
 # IOTCONNECT commands
 
 def on_relay_command(command_name, parameters):
+    global LAST_FREQ, LAST_AMP, LAST_VOLUME
     print(f"IOTCONNECT command: {command_name} {parameters}")
     if command_name == "set-freq":
         try:
             val = parameters.get("freq") if isinstance(parameters, dict) else parameters
             wave_gen.set_frequency(float(val))
+            LAST_FREQ = float(val)
+            ui.send_message("theremin:state", {"freq": LAST_FREQ, "amp": wave_gen.get_state()["amplitude"]})
             send_telemetry(wave_gen.get_state()["frequency"], wave_gen.get_state()["amplitude"], wave_gen.get_state()["volume"], "set-freq")
         except Exception as e:
             print(f"IOTCONNECT set-freq failed: {e}")
@@ -108,6 +123,8 @@ def on_relay_command(command_name, parameters):
         try:
             val = parameters.get("amp") if isinstance(parameters, dict) else parameters
             wave_gen.set_amplitude(float(val))
+            LAST_AMP = float(val)
+            ui.send_message("theremin:state", {"freq": wave_gen.get_state()["frequency"], "amp": LAST_AMP})
             send_telemetry(wave_gen.get_state()["frequency"], wave_gen.get_state()["amplitude"], wave_gen.get_state()["volume"], "set-amp")
         except Exception as e:
             print(f"IOTCONNECT set-amp failed: {e}")
@@ -115,15 +132,23 @@ def on_relay_command(command_name, parameters):
         try:
             val = parameters.get("volume") if isinstance(parameters, dict) else parameters
             wave_gen.set_volume(int(val))
+            LAST_VOLUME = int(val)
+            ui.send_message("theremin:volume", {"volume": LAST_VOLUME})
             send_telemetry(wave_gen.get_state()["frequency"], wave_gen.get_state()["amplitude"], wave_gen.get_state()["volume"], "set-volume")
         except Exception as e:
             print(f"IOTCONNECT set-volume failed: {e}")
     elif command_name == "power":
         try:
             val = parameters.get("on") if isinstance(parameters, dict) else parameters
-            on = bool(val)
+            if isinstance(val, str):
+                on = val.strip().lower() in ("1", "true", "yes", "on")
+            else:
+                on = bool(val)
             if not on:
                 wave_gen.set_amplitude(0.0)
+            else:
+                wave_gen.set_amplitude(LAST_AMP)
+            ui.send_message("theremin:state", {"freq": wave_gen.get_state()["frequency"], "amp": wave_gen.get_state()["amplitude"]})
             send_telemetry(wave_gen.get_state()["frequency"], wave_gen.get_state()["amplitude"], wave_gen.get_state()["volume"], "power")
         except Exception as e:
             print(f"IOTCONNECT power failed: {e}")
