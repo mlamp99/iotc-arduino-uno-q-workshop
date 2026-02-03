@@ -28,7 +28,23 @@
             "aggregateTypes": []
         },
         {
+            "name": "device_name",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
             "name": "keyword",
+            "displayName": "",
+            "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "state",
             "displayName": "",
             "type": "STRING",
             "description": "",
@@ -39,6 +55,22 @@
             "name": "status",
             "displayName": "",
             "type": "STRING",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "confidence",
+            "displayName": "",
+            "type": "DECIMAL",
+            "description": "",
+            "unit": "",
+            "aggregateTypes": []
+        },
+        {
+            "name": "last_detected_ts",
+            "displayName": "",
+            "type": "INTEGER",
             "description": "",
             "unit": "",
             "aggregateTypes": []

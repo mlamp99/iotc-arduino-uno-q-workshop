@@ -29,8 +29,12 @@ App Lab folder: `/home/arduino/ArduinoApps/hey-arduino`
 | Field | Type |
 | --- | --- |
 | `UnoQdemo` | `STRING` |
+| `device_name` | `STRING` |
 | `keyword` | `STRING` |
+| `state` | `STRING` |
 | `status` | `STRING` |
+| `confidence` | `DECIMAL` |
+| `last_detected_ts` | `INTEGER` |
 
 ## Commands
 (none)
