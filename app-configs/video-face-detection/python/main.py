@@ -8,6 +8,7 @@ from arduino.app_bricks.video_objectdetection import VideoObjectDetection
 from datetime import datetime, UTC
 import time
 import json
+import threading
 
 # ---- IOTCONNECT Relay (App Lab TCP bridge) ----
 from iotc_relay_client import IoTConnectRelayClient
@@ -22,6 +23,8 @@ MANUAL_TRIGGER = False
 IOTC_INTERVAL_SEC = 5
 IOTC_LAST_SEND = 0.0
 CURRENT_CONFIDENCE = 0.5
+LAST_DETECTION_TS = 0.0
+LAST_STATE = "none"
 
 
 def set_auto(val):
@@ -54,6 +57,22 @@ def build_slots(detections):
             slots[f"class_name_{i+1}"] = ""
             slots[f"confidence_{i+1}"] = 0.0
     return slots
+
+
+def send_no_detection_telemetry():
+    payload = {
+        "UnoQdemo": UNOQ_DEMO_NAME,
+        "auto_mode": "auto" if AUTO_MODE else "manual",
+        "interval_sec": int(IOTC_INTERVAL_SEC),
+        "detection_count": 0,
+        "max_confidence": 0.0,
+        "avg_confidence": 0.0,
+        "detections_json": "[]",
+        "status": "ok",
+    }
+    payload.update(build_slots([]))
+    print("IOTCONNECT send:", payload)
+    relay.send_telemetry(payload)
 
 
 ui = WebUI()
@@ -109,6 +128,9 @@ ui.on_message("override_th", lambda sid, threshold: detection_stream.override_th
 
 # Register a callback for when all objects are detected
 def send_detections_to_ui(detections: dict):
+    global LAST_DETECTION_TS, LAST_STATE
+    LAST_DETECTION_TS = time.time()
+    LAST_STATE = "detections"
     for key, value in detections.items():
         entry = {
             "content": key,
@@ -140,6 +162,23 @@ def send_detections_to_ui(detections: dict):
         relay.send_telemetry(payload)
 
 
+def no_detection_watchdog():
+    global LAST_STATE
+    while True:
+        time.sleep(0.5)
+        if not AUTO_MODE:
+            continue
+        if LAST_STATE != "detections":
+            continue
+        if (time.time() - LAST_DETECTION_TS) < IOTC_INTERVAL_SEC:
+            continue
+        if not should_send():
+            continue
+        LAST_STATE = "none"
+        send_no_detection_telemetry()
+
+
 detection_stream.on_detect_all(send_detections_to_ui)
+threading.Thread(target=no_detection_watchdog, daemon=True).start()
 
 App.run()
