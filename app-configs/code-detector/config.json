@@ -3,6 +3,14 @@
         {
             "name": "reset",
             "parameters": []
+        },
+        {
+            "name": "detect-code",
+            "parameters": [
+                "image_url",
+                "image",
+                "image_type"
+            ]
         }
     ],
     "example": "code-detector",

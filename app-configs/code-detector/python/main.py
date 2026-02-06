@@ -5,7 +5,11 @@
 from datetime import datetime, UTC
 import io
 import base64
+import json
+import shlex
+import requests
 from PIL.Image import Image
+from PIL import Image as PILImage
 from arduino.app_utils import *
 from arduino.app_peripherals.usb_camera import USBCamera
 from arduino.app_bricks.web_ui import WebUI
@@ -39,9 +43,29 @@ def send_telemetry(content, code_type, status="ok"):
 
 detected = False
 
-def on_code_detected(frame: Image, detection: Detection):
+
+def parse_payload(parameters):
+    if isinstance(parameters, dict):
+        return parameters
+    if isinstance(parameters, str):
+        raw = parameters.strip()
+        if raw.startswith("{") and raw.endswith("}"):
+            try:
+                return json.loads(raw)
+            except Exception:
+                return {}
+        tokens = shlex.split(raw)
+        payload = {}
+        if len(tokens) >= 1:
+            payload["image_url"] = tokens[0]
+        if len(tokens) >= 2:
+            payload["image_type"] = tokens[1]
+        return payload
+    return {}
+
+def handle_detection(frame: Image, detection: Detection, force=False):
     global detected
-    if detected:
+    if detected and not force:
         return
 
     frame = draw_bounding_box(frame, detection)
@@ -62,6 +86,10 @@ def on_code_detected(frame: Image, detection: Detection):
     detected = True
 
     send_telemetry(detection.content, detection.type, "ok")
+
+
+def on_code_detected(frame: Image, detection: Detection):
+    handle_detection(frame, detection)
 
 
 def on_frame(frame: Image):
@@ -93,6 +121,53 @@ def reset_detection(_, __):
     send_telemetry("", "", "reset")
 
 
+def detect_codes_in_image(frame: Image):
+    for method_name in ("detect_image", "detect", "process_image", "process_frame", "_detect"):
+        method = getattr(detector, method_name, None)
+        if callable(method):
+            result = method(frame)
+            if isinstance(result, Detection):
+                return [result]
+            if isinstance(result, list) and result:
+                return [r for r in result if isinstance(r, Detection)]
+    return []
+
+
+def on_relay_command(command_name, parameters):
+    print(f"IOTCONNECT command: {command_name} {parameters}")
+    if command_name == "reset":
+        reset_detection(None, None)
+        return
+    if command_name != "detect-code":
+        return
+
+    payload = parse_payload(parameters)
+    image_data = payload.get("image")
+    image_url = payload.get("image_url")
+
+    if not image_data and not image_url:
+        send_telemetry("", "", "error:no_image")
+        return
+
+    try:
+        if image_url and not image_data:
+            resp = requests.get(image_url, timeout=10)
+            resp.raise_for_status()
+            image_bytes = resp.content
+        else:
+            image_bytes = base64.b64decode(image_data)
+        frame = PILImage.open(io.BytesIO(image_bytes))
+    except Exception as e:
+        send_telemetry("", "", f"error:fetch_failed:{e}")
+        return
+
+    detections = detect_codes_in_image(frame)
+    if not detections:
+        send_telemetry("", "", "not_found")
+        return
+    handle_detection(frame, detections[0], force=True)
+
+
 def on_error(e: Exception):
     ui.send_message('error', str(e))
     send_telemetry("", "", f"error:{e}")
@@ -108,5 +183,6 @@ detector.on_error(on_error)
 ui = WebUI()
 ui.expose_api('GET', '/list_scans', on_list_scans)
 ui.on_message('reset_detection', reset_detection)
+relay.command_callback = on_relay_command
 
 App.run()

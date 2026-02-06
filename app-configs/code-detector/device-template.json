@@ -20,6 +20,13 @@
             "requiredParam": false,
             "requiredAck": true,
             "isOTACommand": false
+        },
+        {
+            "name": "detect-code",
+            "command": "detect-code",
+            "requiredParam": true,
+            "requiredAck": true,
+            "isOTACommand": false
         }
     ],
     "name": "UnoQCodeDetector",

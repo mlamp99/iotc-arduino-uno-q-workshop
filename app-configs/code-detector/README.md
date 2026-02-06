@@ -37,6 +37,15 @@ App Lab folder: `/home/arduino/ArduinoApps/qr-and-barcode-scanner`
 | Command | Parameters |
 | --- | --- |
 | `reset` | `(none)` |
+| `detect-code` | `image_url`, `image`, `image_type` |
+
+## Example IOTCONNECT command payload
+```json
+{
+  "image_url": "https://example.com/sample.jpg",
+  "image_type": "jpeg"
+}
+```
 
 ## How to use in App Lab
 1) Copy the example into your App Lab workspace.
