@@ -9,7 +9,8 @@
             "parameters": [
                 "image_url",
                 "image",
-                "image_type"
+                "image_type",
+                "confidence"
             ]
         }
     ],

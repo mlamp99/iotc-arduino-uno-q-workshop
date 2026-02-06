@@ -37,7 +37,7 @@ App Lab folder: `/home/arduino/ArduinoApps/qr-and-barcode-scanner`
 | Command | Parameters |
 | --- | --- |
 | `reset` | `(none)` |
-| `detect-code` | `image_url`, `image`, `image_type` |
+| `detect-code` | `image_url`, `image`, `image_type`, `confidence` |
 
 ## Example IOTCONNECT command payload
 ```json
@@ -64,3 +64,4 @@ App Lab folder: `/home/arduino/ArduinoApps/qr-and-barcode-scanner`
 ## Notes
 - If the example sends telemetry only on user action, you will not see data until that action occurs.
 - If you change the device template in IOTCONNECT, re-create the device or update it to match these fields.
+- When no code is found for a command, the app emits a `code_not_found` UI event and telemetry status `not_found`.

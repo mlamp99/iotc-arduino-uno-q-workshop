@@ -60,6 +60,8 @@ def parse_payload(parameters):
             payload["image_url"] = tokens[0]
         if len(tokens) >= 2:
             payload["image_type"] = tokens[1]
+        if len(tokens) >= 3:
+            payload["confidence"] = tokens[2]
         return payload
     return {}
 
@@ -163,6 +165,7 @@ def on_relay_command(command_name, parameters):
 
     detections = detect_codes_in_image(frame)
     if not detections:
+        ui.send_message("code_not_found", {"timestamp": datetime.now(UTC).isoformat()})
         send_telemetry("", "", "not_found")
         return
     handle_detection(frame, detections[0], force=True)
